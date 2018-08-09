@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="pms">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>PMS | Gameloft</title>
+    <!-- <title>PMS | Gameloft</title> -->
+    <title>{{hd_page_title}}</title>
 
-    
     <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css"/>
-    
     <link rel="stylesheet" type="text/css" href="node_modules/simple-line-icons/css/simple-line-icons.css"/>
-    
     <link rel="stylesheet" type="text/css" href="assets/css/gameloft_pms_front_end-0.0.1.css"/>
-    
+    <link rel="stylesheet" type="text/css" href="assets/css/grid.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -21,90 +25,12 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
-    <header>
-        <div class="header-logo">
-            <div class="d-flex justify-content-center align-items-center">
-                <div class="logo-img ">
-                    <img src="assets/images/img-logo.png" alt="" />
-                </div>
-            </div>
-        </div>
-        <div class="header-navbar">
-            <div class="d-flex justify-content-between align-items-center">
-                <a href="#" class="avata-name d-flex align-items-center">
-                    <div class="avata-item">
-                        <img src="assets/images/img-avatar.png" alt="" />
-                    </div>
-                    <div class="name-item">Daisy Le Mai</div>
-                </a>
-                <a href="#" class="header-email">Daisy.lemai@gameloft.com</a>
-            </div>
-        </div>
-    </header>
-    <div class="group-filter d-flex justify-content-between align-items-center">
-        <div class="menu-tab d-flex">
-            <label class="btn .btn-secondary active">
-                EVALUATION
-            </label>
-            <label class="btn .btn-secondary">
-                DEVELOPMENT PLAN
-            </label>
-        </div>
-        <div class="filter-select d-flex align-items-center">
-            <span>Period</span>
-            <select class="custom-select" id="inputGroupSelect01">
-                <option selected>Current</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-        </div>
-    </div>
-    <div class="page-content">
-    <div class="widget">
-            <div class="d-flex justify-content-between">
-                <div class="widget-title">Objective 1</div>
-                <div class="widget-btn-delete">Delete</div>
-            </div>
-            <div class="widget-big-title">Bug Quality</div>
-            <div class="widget-content">
-                <div class="widget-content-item display-table">
-                    <div class="display-table-cell">
-                        <div class="widget-content-item-title">Sub 1</div>
-                        <div class="widget-content-item-content">
-                            Ensure 100% bugs are fixed completely and effectively; no reopened bug due to developer's mistake & no new critical bugs on the release versio vdsdsds
-                        </div>
-                    </div>
-                    <div class="display-table-cell">
-                        <div class="widget-content-item-title">ETA</div>
-                        <div class="widget-content-item-content">
-                            02/03/18
-                        </div>
-                    </div>
-                    <div class="display-table-cell">
-                        <div class="widget-content-item-title">Weight</div>
-                        <div class="widget-content-item-content">
-                            —%
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <div class="top-content bg-medium-blue">
-        <div class="top-content-item">SUMMARY 2018</div>
-    </div>
-    </div>
-
-<script type="text/javascript" src="node_modules/popper.js/dist/umd/popper.min.js"></script>
-
-<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
-
-<script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-
-<script type="text/javascript" src="assets/js/app.js"></script>
-
-<script type="text/javascript" src="assets/js/custom.js"></script>
-
+<body ng-controller="mainCtrl">
+  <ng-view></ng-view>
+  <script type="text/javascript" src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script type="text/javascript" src="assets/js/custom.js"></script>
 </body>
 </html>

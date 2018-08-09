@@ -16,6 +16,7 @@
   --light-grey: #f3f7fb;
   --danger: #f44336;
   --success: #00C853;
+  --really-light-blue: #d4eaff;
 }
 
 body{
@@ -123,6 +124,7 @@ a{
 .header_bar{
   grid-area: header_bar;
   background: var(--azul);
+  padding-left: 6rem;
 }
 
 .header_bar>img{
@@ -228,7 +230,7 @@ td{
 }
 
 .idp_table{
-  margin-left: 31px;
+  margin-left: 6rem;
   margin-right: 32px;
   margin-top: 32px;
   width: 100%;
@@ -274,6 +276,11 @@ tr.table_row_border>td>a{
 
 .idp_status{
   color: var(--azul);
+}
+
+.idp_status:hover{
+  font-weight: bold;
+  cursor: pointer;
 }
 /* Main content grid */
 
@@ -337,4 +344,176 @@ tr.table_row_border>td>a{
 
 .modal-select:focus{
   border-bottom: solid 2px var(--bright-blue);
+}
+
+.evor_padding_left{
+  padding-left: 1.5rem;
+}
+.evor_side_bar{
+  width: 5rem;
+  background-color: var(--black);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: -webkit-fill-available;
+  text-align: center;
+  z-index: 2;
+}
+
+.evor_side_bar>img{
+  width: 28px;
+  margin-top: 31px;
+}
+
+.evor_side_bar>.icon-chart{
+  font-size: 24px;
+  color: white;
+  margin-top: 52px;
+  cursor: pointer;
+}
+.evor_side_bar>.icon-people{
+  font-size: 24px;
+  color: white;
+  margin-top: 52px;
+  cursor: pointer;
+}
+
+.team_bar{
+  width: 20rem;
+  height: fit-content;
+  position: absolute;
+  top: 0px;
+  left: 5rem;
+  box-shadow: 0 11px 13px 0 rgba(187, 187, 187, 0.5);
+  background: white;
+  display: none;
+  transition: 0.5s;
+  z-index: 1;
+}
+
+.team_bar_header{
+  height: 80px;
+  background-color: #e9ebef;
+}
+
+.team_bar_header>.icon-people{
+  width: 28px;
+  color: var(--black);
+  font-size: 26px;
+  padding-left: 28px;
+  padding-top: 32px;
+  display: inline-block;
+}
+
+.team_bar_text{
+  text-transform: uppercase;
+  font-size: 20px;
+  color: var(--greyish-brown);
+  display: inline-block;
+  margin-left: 35px;
+  position: absolute;
+  top:30px;
+}
+
+.all_team{
+  height: 57px;
+  background-color: #eaf3ff;
+  padding-top: 1.2rem;
+  padding-left: 1.7rem;
+}
+
+.all_team>a{
+  font-size: 14px;
+  font-family: 'Fira Sans';
+}
+
+.team_bar>ul{
+  list-style-type: none;
+}
+
+.team_bar>ul>li{
+  padding: 12px 0px;
+}
+
+.team_bar>ul>li>a{
+  text-decoration: none;
+  color: inherit;
+}
+
+.team_bar>ul>li>a>img{
+  width: 24px;
+  margin-right: 13px;
+  border-radius: 50%;
+}
+
+.team_filter{
+  height: 80px;
+  background-color: var(--really-light-blue);
+  padding-left: 6rem;
+  padding-top: 25px;
+}
+
+.team_filter>select,.team_filter>select:focus{
+  padding: 10px 16px;
+  width: 14rem;
+  color: white;
+  background-color: var(--azul);
+  border: 0px;
+  border-radius: 2px;
+
+}
+
+.team_filter>select>option{
+  background-color: white;
+  border: 0px;
+  line-height: 1.57;
+  color: var(--greyish-brown);
+}
+
+.team_filter>input,.team_filter>input:focus{
+  padding-left: 16px;
+  height: 40px;
+  border-radius: 2px;
+  background-color: #ffffff;
+  border: 0px;
+  width: 33rem;
+}
+
+.team_performance{
+  width: 44rem;
+  height: 60%;
+  border-radius: 3px;
+  box-shadow: 0 6px 13px 0 rgba(0, 0, 0, 0.09);
+  background-color: #ffffff;
+  border: solid 1px #d8d8d8;
+  position: absolute;
+  top: 15rem;
+  left: 30rem;
+  padding: 31px;
+  display: none;
+}
+
+.team_performance>h1{
+  font-family: 'Fira Sans';
+  font-size: 24px;
+  font-weight: normal;
+  color: var(--greyish-brown);
+  margin-bottom: 20px;
+}
+
+.performance_content>img{
+  width: 32px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.team_performance>.performance_chart{
+  margin-top: 17px;
+  background-color: #f1f4f8;
+  height: 70%;
+}
+
+/* Use for any evor case */
+.evor_navbar{
+  padding-left: 6rem !important;
 }

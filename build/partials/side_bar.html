@@ -1,0 +1,17 @@
+<div class="evor_side_bar"> <img src="assets/images/img-logo.png" alt="">
+  <div class="icon-chart"> </div>
+  <div class="icon-people" ng-click="show_team()"> </div>
+</div>
+
+<!-- Sidebar -->
+<div class="team_bar" id="team_bar">
+  <div class="team_bar_header">
+    <div class="icon-people"> </div>
+    <div class="team_bar_text"> team management </div>
+  </div>
+  <div class="all_team"><a href="#">All members({{num_of_users}})</a> </div>
+  <ul ng-repeat="user in users">
+    <li><a href="case-2.html"><img src="assets/images/img-avatar.png" alt="">{{user.full_name}}</a></li>
+  </ul>
+</div>
+<!-- Sidebar -->
