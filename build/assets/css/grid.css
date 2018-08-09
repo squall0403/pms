@@ -481,7 +481,7 @@ tr.table_row_border>td>a{
 
 .team_performance{
   width: 44rem;
-  height: 60%;
+  height: fit-content;
   border-radius: 3px;
   box-shadow: 0 6px 13px 0 rgba(0, 0, 0, 0.09);
   background-color: #ffffff;
@@ -490,6 +490,7 @@ tr.table_row_border>td>a{
   top: 15rem;
   left: 30rem;
   padding: 31px;
+  padding-bottom: 0;
   display: none;
 }
 
@@ -509,8 +510,9 @@ tr.table_row_border>td>a{
 
 .team_performance>.performance_chart{
   margin-top: 17px;
-  background-color: #f1f4f8;
-  height: 70%;
+  /* background-color: #f1f4f8; */
+  height: fit-content;
+  width: 100%;
 }
 
 /* Use for any evor case */
