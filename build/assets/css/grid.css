@@ -1,0 +1,340 @@
+:root {
+  /* --pale-grey: #f3f7fb; */
+  --pale-grey: #dfe7f1;
+  --azul: #4265ed;
+  --greyish-brown: #4a4a4a;
+  --warm-grey: #9b9b9b;
+  --neon-blue: #00dfff;
+  --light-periwinkle: #ebeffd;
+  --azul-two: #4063ea;
+  --pale-sky-blue: #c7e1ff;
+  --ice-blue: #fbffff;
+  --bright-blue: #007bff;
+  --pale-salmon: #fdadad;
+  --dark-sky-blue: #428ded;
+  --black: #363636;
+  --light-grey: #f3f7fb;
+  --danger: #f44336;
+  --success: #00C853;
+}
+
+body{
+  margin: 0px;
+  font-family: 'Fira Sans', sans-serif;
+}
+
+a{
+  color: var(--azul);
+  text-decoration: underline;
+  opacity: 1 !important;
+}
+
+.not_a{
+  color: var(--black);
+  text-decoration: none;
+}
+
+.row{
+  margin-right: 0px !important;
+}
+
+.btn{
+  margin: 27px 12px;
+  padding: 10px 30px;
+  text-align: center;
+  height: 40px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Fira Sans';
+  cursor: pointer;
+}
+
+.btn.out_line{
+  background-color: #ffffff;
+  border: solid 1px var(--azul);
+  color: var(--azul);
+}
+
+.btn-plain{
+  background: none;
+  border: none;
+  color: var(--warm-grey);
+}
+
+.btn-primary{
+  border: none;
+  background-color: var(--azul);
+  color:white;
+}
+
+.btn-danger{
+  border: none;
+  background-color: var(--danger);
+  color:white;
+}
+
+.success{
+  color: var(--success);
+}
+/* Main grid */
+.main_grid{
+  display: grid;
+  grid-template-columns: 80px auto;
+  grid-template-rows: auto;
+  grid-template-areas: "side_bar main_cont";
+}
+/* Main grid */
+
+/* Side bar grid*/
+.side_bar{
+  background: var(--black);
+  grid-area: side_bar;
+  height: -webkit-fill-available;
+  text-align:  center;
+  z-index: 1
+}
+
+.side_bar_icon{
+  font-size: 24px;
+  color: white;
+  margin-top: 52px;
+  cursor: pointer;
+}
+
+.logo {
+  width: 28px;
+  height: 19px;
+  margin-top: 31px;
+}
+/* Side bar grid*/
+
+/* Main content grid */
+.main_cont{
+  grid-area: main_cont;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 80px auto;
+  grid-template-areas: "header_bar" "content";
+}
+
+/* header_bar */
+.header_bar{
+  grid-area: header_bar;
+  background: var(--azul);
+}
+
+.header_bar>img{
+  width: 48px;
+  margin-left: 24px;
+  margin-top: 14px;
+  text-align: center;
+}
+
+.header_bar_name{
+  display: inline;
+  color: white;
+  font-size: 19px;
+  padding-left: 16px;
+  position: relative;
+  top: -16px;
+}
+
+.header_bar_email{
+  display: inline;
+  color: var(--neon-blue);
+  font-size: 14px;
+  padding-right: 16px;
+  position: relative;
+  top: 33px;
+  float: right;
+}
+
+.header_bar_data{
+  font-size: 46px;
+  display: inline-block;
+  color: white;
+  font-weight: 200;
+  font-family: 'Fira Sans';
+  margin-top: 0.9rem;
+  margin-left: 2rem;
+}
+
+.header_bar_legend{
+  font-size: 24px;
+  display: inline-block;
+  color: white;
+  font-weight: 200;
+  text-transform: uppercase;
+  font-family: 'Fira Sans';
+  padding-left: 1rem;
+}
+/* header_bar */
+.content{
+  grid-area: content;
+  background-color: var(--light-grey);
+}
+
+/* Nav bar */
+.nav_bar{
+  list-style-type: none;
+  margin: 0;
+}
+
+.nav_bar>li{
+  display: inline-block;
+  margin: 12px 47px 0px 47px;
+  padding-bottom: 12px;
+  text-align: center;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.nav_bar>li:hover{
+  border-bottom: solid 4px var(--pale-sky-blue);
+  cursor: pointer;
+}
+
+.nav_bar>li.active{
+  border-bottom: solid 4px var(--azul);
+  font-weight: 500;
+}
+/* Nav bar */
+
+/* Nav bar position*/
+.nav_bar_pos_label{
+  font-size: 14px;
+  margin: 12px 8px;
+  display: inline-block;
+}
+
+.nav_bar_pos{
+  font-size: 14px;
+  display: inline-block;
+  width: 70%;
+  height: 32px;
+  padding: 4px 10px;
+  border-radius: 2px;
+  border: solid 1px var(--pale-sky-blue);
+  margin-top: 9px;
+}
+/* Nav bar position*/
+
+/* IDP table */
+td{
+  font-size: 14px;
+  color: var(--greyish-brown);
+}
+
+.idp_table{
+  margin-left: 31px;
+  margin-right: 32px;
+  margin-top: 32px;
+  width: 100%;
+  border: solid 1px var(--pale-grey);
+  background: white;
+}
+
+.idp_table>thead>tr>th{
+  height: 48px;
+  font-size: 12px;
+  color: black;
+  opacity: 0.5;
+  background-color: rgba(0, 0, 0, 0.2);
+  text-align: left;
+  padding-left: 8px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.idp_table>tbody>tr:hover{
+  background-color: var(--light-grey);
+}
+
+.idp_table>tbody>tr>td{
+  padding: 17px 17px 17px 8px;
+}
+
+tr.table_row_border td{
+  border-bottom:1pt solid var(--pale-grey);
+}
+
+tr.table_row_border>td>img{
+  width: 24px;
+  border-radius: 50%;
+}
+
+tr.table_row_border>td>a{
+  position: relative;
+  text-decoration: none;
+  top: -5px;
+  margin-left: 8px;
+}
+
+.idp_status{
+  color: var(--azul);
+}
+/* Main content grid */
+
+/* Modal IDP */
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    /* background-color: rgb(0,0,0); */
+    /* background-color: rgba(0,0,0,0.4); */
+    background-color: rgba(24, 60, 103, 0.5);
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #ffffff;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: solid 1px #d8d8d8;
+    width: 37%; /* Could be more or less, depending on screen size */
+    box-shadow: 0 6px 13px 0 rgba(0, 0, 0, 0.09);
+    border-radius: 3px;
+    font-family: 'Fira Sans';
+}
+
+.modal-header{
+  font-size: 24px;
+  color: var(--greyish-brown);
+  font-family: 'Fira Sans';
+  padding: 32px 32px 24px 32px;
+}
+
+.modal-subheader{
+  font-size: 12px;
+  color: var(--warm-grey);
+  padding: 8px 32px;
+  text-transform: uppercase;
+}
+
+.modal-subheader:focus{
+  color: var(--bright-blue);
+}
+
+.modal-select{
+  padding-left: 0;
+  margin: 0px 27px 32px;
+  height: 25px;
+  width: 85%;
+  font-size: 16px;
+  letter-spacing: 0.1px;
+  font-family: 'Fira Sans';
+  border: 0px;
+  border-bottom: solid 1px var(--warm-grey);
+}
+
+.modal-select:focus{
+  border-bottom: solid 2px var(--bright-blue);
+}

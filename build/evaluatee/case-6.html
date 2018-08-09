@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="pms">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>PMS | Gameloft</title>
+  <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../node_modules/simple-line-icons/css/simple-line-icons.css" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/gameloft_pms_front_end-0.0.1.css" />
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+  <script src="../assets/js/app.js"></script>
+</head>
+
+<body class="case-6" ng-controller="mainCtrl">
+  <header>
+    <div class="header-logo">
+      <div class="d-flex justify-content-center align-items-center">
+        <div class="logo-img "> <img src="../assets/images/img-logo.png" alt="" /> </div>
+      </div>
+    </div>
+    <div class="header-navbar">
+      <div class="d-flex justify-content-between align-items-center">
+        <a href="#" class="avata-name d-flex align-items-center">
+          <div class="avata-item"> <img src="../assets/images/img-avatar.png" alt="" /> </div>
+          <div class="name-item">Daisy Le Mai</div>
+        </a> <a href="#" class="header-email">Daisy.lemai@gameloft.com</a> </div>
+    </div>
+  </header>
+  <div class="group-filter d-flex justify-content-between align-items-center">
+    <div class="menu-tab d-flex"> <label class="btn .btn-secondary active">
+            EVALUATION
+          </label> <label class="btn .btn-secondary">
+              <a href="idp.html">DEVELOPMENT PLAN</a>
+          </label> </div>
+    <div class="filter-select d-flex align-items-center"> <span>Period</span> <select class="custom-select" id="inputGroupSelect01">
+            <option selected>Current</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select> </div>
+  </div>
+  <div class="page-content">
+    <div class="top-content bg-medium-blue">
+      <div class="top-content-item active">SUMMARY 2018</div>
+    </div>
+    <div class="body-content">
+      <div class="alert">
+        <div class="alert-title"> Click “Agree” to complete the EVALUATION, If you do not agree, please contact your line manager for more information. </div>
+        <div class="alert-button"> <a style="background-color:#4265ed" class="btn btn-secondary" href="case-7.html">agree</a> </div>
+      </div>
+      <div class="result-info">
+        <div class="row">
+          <dic class="col">
+            <div class="item-result">
+              <div class="title">RESULTS</div>
+              <div class="first-item">
+                <div class="small-text">Score</div>
+                <div class="bg-regular-cyan">{{total_score}}%</div>
+              </div>
+              <div class="second-item">
+                <div class="small-text">Ranking</div>
+                <div class="bg-regular-cyan"> Meet Expectation </div>
+              </div>
+            </div>
+          </dic>
+          <dic class="col">
+            <dic class="item-info">
+              <div class="title">InfoRmation</div>
+              <div class="info-content">
+                <div class="row">
+                  <div class="col">
+                    <div class="display-table">
+                      <div class="small-text display-table-cell"> Evaluatee </div>
+                      <div class="small-text-content display-table-cell"> Daisy Le Mai </div>
+                    </div>
+                    <div class="display-table">
+                      <div class="small-text display-table-cell"> Job Tittle </div>
+                      <div class="small-text-content display-table-cell"> Developer </div>
+                    </div>
+                    <div class="display-table">
+                      <div class="small-text display-table-cell"> Position </div>
+                      <div class="small-text-content display-table-cell"> Senior </div>
+                    </div>
+                    <div class="display-table">
+                      <div class="small-text display-table-cell"> Team </div>
+                      <div class="small-text-content display-table-cell"> Beyond Digital </div>
+                    </div>
+                    <div class="display-table">
+                      <div class="small-text display-table-cell"> Department </div>
+                      <div class="small-text-content display-table-cell"> DEV </div>
+                    </div>
+                    <div class="display-table">
+                      <div class="small-text display-table-cell"> Evaluator 1 </div>
+                      <div class="small-text-content display-table-cell"> Gorge </div>
+                    </div>
+                    <div class="display-table">
+                      <div class="small-text display-table-cell"> Evaluator 2 </div>
+                      <div class="small-text-content display-table-cell"> Evangela </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="display-table">
+                      <div class="small-text display-table-cell"> Period </div>
+                      <div class="small-text-content display-table-cell"> Semester 1 - 2018 </div>
+                    </div>
+                    <div class="display-table">
+                      <div class="small-text display-table-cell"> Start-end </div>
+                      <div class="small-text-content display-table-cell"> 02/03/18 - 05/06/18 </div>
+                    </div>
+                    <div class="display-table">
+                      <div class="small-text display-table-cell"> Duration </div>
+                      <div class="small-text-content display-table-cell"> 4,1 months </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </dic>
+          </dic>
+        </div>
+      </div>
+      <div class="evaluation-detail">
+        <div class="title">Evaluation details</div>
+        <div class="widget widget-case-6" ng-repeat="obj in objs">
+          <div class="d-flex justify-content-between">
+            <div class="widget-title">Objective {{$index + 1}}</div>
+          </div>
+          <div class="widget-big-title">{{obj.objective}}</div>
+          <div class="widget-content">
+            <div class="widget-content-item display-table" ng-repeat="sub_obj in sub_objs | filter : obj.objective">
+              <div class="display-table-cell">
+                <div class="widget-content-item-title">Sub-objective {{$index +1}}</div>
+                <div class="widget-content-item-content"> {{sub_obj.sub_objectives}} </div>
+              </div>
+              <div class="display-table-cell">
+                <div class="widget-content-item-title">ETA</div>
+                <div class="widget-content-item-content"> {{sub_obj.eta}} </div>
+              </div>
+              <div class="display-table-cell">
+                <div class="widget-content-item-title">Weight</div>
+                <div class="widget-content-item-content">
+                  <div class="percent-box bg-light-cyan"> {{sub_obj.weight}}% </div>
+                </div>
+              </div>
+              <div class="display-table-cell">
+                <div class="widget-content-item-title">Ratings</div>
+                <div class="widget-content-item-content d-flex">
+                  <div class="percent-box bg-ragular-grey">{{sub_obj.self_rate}}%</div>
+                  <div class="percent-box bg-medium-cyan">{{sub_obj.rate1}}%</div>
+                  <div class="percent-box bg-medium-cyan">{{sub_obj.rate2}}%</div>
+                </div>
+              </div>
+              <div class="display-table-cell">
+                <div class="widget-content-item-title">Evaluatee</div>
+                <div class="widget-content-item-content small-content"> I have completely finished this objective. </div>
+              </div>
+              <div class="display-table-cell">
+                <div class="widget-content-item-title">Evaluator 1</div>
+                <div class="widget-content-item-content small-content"> Completly finished assigned objectives within ETA. </div>
+              </div>
+              <div class="display-table-cell">
+                <div class="widget-content-item-title">Evaluator 2</div>
+                <div class="widget-content-item-content small-content"> She was late sometimes, but the performance was good in general. </div>
+              </div>
+              <div class="display-table-cell">
+                <div class="widget-content-item-title">Score</div>
+                <div class="widget-content-item-content">
+                  <div class="percent-box-square bg-dark-cyan"> {{sub_obj.achievement}}% </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="widget-content-item display-table"> -->
+            <!-- <div class="display-table-cell"> -->
+            <!-- <div class="widget-content-item-title">Sub 1</div> -->
+            <!-- <div class="widget-content-item-content"> -->
+            <!-- Ensure 100% bugs are fixed completely and effectively; no reopened bug due to developer's mistake & no new critical bugs on the release version.                            </div> -->
+            <!-- </div> -->
+            <!-- <div class="display-table-cell"> -->
+            <!-- <div class="widget-content-item-title">ETA</div> -->
+            <!-- <div class="widget-content-item-content"> -->
+            <!-- 02/03/18 -->
+            <!-- </div> -->
+            <!-- </div> -->
+            <!-- <div class="display-table-cell"> -->
+            <!-- <div class="widget-content-item-title">Weight</div> -->
+            <!-- <div class="widget-content-item-content"> -->
+            <!-- <div class="percent-box bg-light-cyan"> -->
+            <!-- 15% -->
+            <!-- </div> -->
+            <!-- </div> -->
+            <!-- </div> -->
+            <!-- <div class="display-table-cell"> -->
+            <!-- <div class="widget-content-item-title">Ratings</div> -->
+            <!-- <div class="widget-content-item-content d-flex"> -->
+            <!-- <div class="percent-box bg-ragular-grey">15%</div> -->
+            <!-- <div class="percent-box bg-medium-cyan">15%</div> -->
+            <!-- <div class="percent-box bg-medium-cyan">15%</div> -->
+            <!-- </div> -->
+            <!-- </div> -->
+            <!-- <div class="display-table-cell"> -->
+            <!-- <div class="widget-content-item-title">Evaluatee</div> -->
+            <!-- <div class="widget-content-item-content small-content"> -->
+            <!-- Aliquam lorem ante, dapibus in, viverra quisAliquam lorem ante, dapibus in, viverra,Aliquam lorem ante, dapibus in, viverra quis -->
+            <!-- </div> -->
+            <!-- </div> -->
+            <!-- <div class="display-table-cell"> -->
+            <!-- <div class="widget-content-item-title">Evaluator 1</div> -->
+            <!-- <div class="widget-content-item-content small-content"> -->
+            <!-- Aliquam lorem ante, dapibus in, viverra quis -->
+            <!-- </div> -->
+            <!-- </div> -->
+            <!-- <div class="display-table-cell"> -->
+            <!-- <div class="widget-content-item-title">Evaluator 2</div> -->
+            <!-- <div class="widget-content-item-content small-content"> -->
+            <!-- Aliquam lorem ante, dapibus in, viverra quis -->
+            <!-- </div> -->
+            <!-- </div> -->
+            <!-- <div class="display-table-cell"> -->
+            <!-- <div class="widget-content-item-title">Score</div> -->
+            <!-- <div class="widget-content-item-content"> -->
+            <!-- <div class="percent-box-square bg-dark-cyan"> -->
+            <!-- 15% -->
+            <!-- </div> -->
+            <!-- </div> -->
+            <!-- </div> -->
+            <!-- </div> -->
+          </div>
+        </div>
+        <!-- <div class="widget widget-case-6"> -->
+        <!-- <div class="d-flex justify-content-between"> -->
+        <!-- <div class="widget-title">Objective 1</div> -->
+        <!-- </div> -->
+        <!-- <div class="widget-big-title">Develop high-quality technical specifications and features</div> -->
+        <!-- <div class="widget-content"> -->
+        <!-- <div class="widget-content-item display-table"> -->
+        <!-- <div class="display-table-cell"> -->
+        <!-- <div class="widget-content-item-title">Sub 1</div> -->
+        <!-- <div class="widget-content-item-content"> -->
+        <!-- Ensure 100% bugs are fixed completely and effectively; no reopened bug due to developer's mistake & no new critical bugs on the release version.                            </div> -->
+        <!-- </div> -->
+        <!-- <div class="display-table-cell"> -->
+        <!-- <div class="widget-content-item-title">ETA</div> -->
+        <!-- <div class="widget-content-item-content"> -->
+        <!-- 02/03/18 -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="display-table-cell"> -->
+        <!-- <div class="widget-content-item-title">Weight</div> -->
+        <!-- <div class="widget-content-item-content"> -->
+        <!-- <div class="percent-box bg-light-cyan"> -->
+        <!-- 15% -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="display-table-cell"> -->
+        <!-- <div class="widget-content-item-title">Ratings</div> -->
+        <!-- <div class="widget-content-item-content d-flex"> -->
+        <!-- <div class="percent-box bg-ragular-grey">15%</div> -->
+        <!-- <div class="percent-box bg-medium-cyan">15%</div> -->
+        <!-- <div class="percent-box bg-medium-cyan">15%</div> -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="display-table-cell"> -->
+        <!-- <div class="widget-content-item-title">Evaluatee</div> -->
+        <!-- <div class="widget-content-item-content small-content"> -->
+        <!-- Aliquam lorem ante, dapibus in, viverra quisAliquam lorem ante, dapibus in, viverra,Aliquam lorem ante, dapibus in, viverra quis -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="display-table-cell"> -->
+        <!-- <div class="widget-content-item-title">Evaluator 1</div> -->
+        <!-- <div class="widget-content-item-content small-content"> -->
+        <!-- Aliquam lorem ante, dapibus in, viverra quis -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="display-table-cell"> -->
+        <!-- <div class="widget-content-item-title">Evaluator 2</div> -->
+        <!-- <div class="widget-content-item-content small-content"> -->
+        <!-- Aliquam lorem ante, dapibus in, viverra quis -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="display-table-cell"> -->
+        <!-- <div class="widget-content-item-title">Score</div> -->
+        <!-- <div class="widget-content-item-content"> -->
+        <!-- <div class="percent-box-square bg-dark-cyan"> -->
+        <!-- 15% -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="widget-content-item display-table"> -->
+        <!-- <div class="display-table-cell"> -->
+        <!-- <div class="widget-content-item-title">Sub 1</div> -->
+        <!-- <div class="widget-content-item-content"> -->
+        <!-- Ensure 100% bugs are fixed completely and effectively; no reopened bug due to developer's mistake & no new critical bugs on the release version.                            </div> -->
+        <!-- </div> -->
+        <!-- <div class="display-table-cell"> -->
+        <!-- <div class="widget-content-item-title">ETA</div> -->
+        <!-- <div class="widget-content-item-content"> -->
+        <!-- 02/03/18 -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="display-table-cell"> -->
+        <!-- <div class="widget-content-item-title">Weight</div> -->
+        <!-- <div class="widget-content-item-content"> -->
+        <!-- <div class="percent-box bg-light-cyan"> -->
+        <!-- 15% -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="display-table-cell"> -->
+        <!-- <div class="widget-content-item-title">Ratings</div> -->
+        <!-- <div class="widget-content-item-content d-flex"> -->
+        <!-- <div class="percent-box bg-ragular-grey">15%</div> -->
+        <!-- <div class="percent-box bg-medium-cyan">15%</div> -->
+        <!-- <div class="percent-box bg-medium-cyan">15%</div> -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="display-table-cell"> -->
+        <!-- <div class="widget-content-item-title">Evaluatee</div> -->
+        <!-- <div class="widget-content-item-content small-content"> -->
+        <!-- Aliquam lorem ante, dapibus in, viverra quisAliquam lorem ante, dapibus in, viverra,Aliquam lorem ante, dapibus in, viverra quis -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="display-table-cell"> -->
+        <!-- <div class="widget-content-item-title">Evaluator 1</div> -->
+        <!-- <div class="widget-content-item-content small-content"> -->
+        <!-- Aliquam lorem ante, dapibus in, viverra quis -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="display-table-cell"> -->
+        <!-- <div class="widget-content-item-title">Evaluator 2</div> -->
+        <!-- <div class="widget-content-item-content small-content"> -->
+        <!-- Aliquam lorem ante, dapibus in, viverra quis -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="display-table-cell"> -->
+        <!-- <div class="widget-content-item-title">Score</div> -->
+        <!-- <div class="widget-content-item-content"> -->
+        <!-- <div class="percent-box-square bg-dark-cyan"> -->
+        <!-- 15% -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- </div> -->
+      </div>
+      <div class="general-comment">
+        <div class="title">General comments</div>
+        <div class="widget widget-case-6">
+          <div class="widget-content">
+            <div class="widget-content-item display-table">
+              <div class="display-table-cell">
+                <div class="widget-content-item-title">Evaluatee - {{users[0].full_name}}</div>
+                <div class="widget-content-item-content">General comment</div>
+              </div>
+            </div>
+            <div class="widget-content-item display-table">
+              <div class="display-table-cell">
+                <div class="widget-content-item-title">Evaluator - {{users[0].evaluator1}}</div>
+                <div class="widget-content-item-content">General comment</div>
+              </div>
+            </div>
+            <div class="widget-content-item display-table">
+              <div class="display-table-cell">
+                <div class="widget-content-item-title">Evaluator - {{users[0].evaluator2}}</div>
+                <div class="widget-content-item-content">General comment</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script type="text/javascript" src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../assets/js/app.js"></script>
+  <script type="text/javascript" src="../assets/js/custom.js"></script>
+</body>
+
+</html>
