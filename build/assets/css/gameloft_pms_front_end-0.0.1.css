@@ -459,7 +459,8 @@ html body .footer-toast {
   padding: 1.25rem 5rem;
   box-shadow: 0 0 11px 0 rgba(21, 80, 98, 0.08);
   transition: all 0.5s ease-in;
-  z-index: 10;
+  z-index: 1;
+  margin-left: 3rem
 }
 html body .footer-toast > .row {
   margin: 0 -15px;
@@ -738,12 +739,12 @@ html body .footer-toast.on {
   border-radius: 0;
 }
 .case-3 .composing-body .filter-group select:first-child {
-  width: 30%;
+  width: 35%;
   border-right: 1px solid #e4e7eb;
   background-color: #e9e9e9;
 }
 .case-3 .composing-body .filter-group select:last-child {
-  width: 70%;
+  width: 65%;
   background-color: #f6f6f6;
 }
 .case-3 .composing-body .filter-group select option {

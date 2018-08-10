@@ -39,7 +39,7 @@ a{
   margin-right: 0px !important;
 }
 
-.btn{
+/* .btn{
   margin: 27px 12px;
   padding: 10px 30px;
   text-align: center;
@@ -50,7 +50,9 @@ a{
   font-weight: 500;
   font-family: 'Fira Sans';
   cursor: pointer;
-}
+  width: 7rem !important;
+  padding: 0px 1rem !important;
+} */
 
 .btn.out_line{
   background-color: #ffffff;
@@ -352,15 +354,15 @@ tr.table_row_border>td>a{
 .evor_side_bar{
   width: 5rem;
   background-color: var(--black);
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  height: -webkit-fill-available;
+  height: 100%;
   text-align: center;
   z-index: 2;
 }
 
-.evor_side_bar>img{
+.evor_side_bar>a>img{
   width: 28px;
   margin-top: 31px;
 }
@@ -480,7 +482,7 @@ tr.table_row_border>td>a{
 }
 
 .team_performance{
-  width: 44rem;
+  /* width: 44rem; */
   height: fit-content;
   border-radius: 3px;
   box-shadow: 0 6px 13px 0 rgba(0, 0, 0, 0.09);
@@ -515,7 +517,17 @@ tr.table_row_border>td>a{
   width: 100%;
 }
 
+.potentail_container{
+  margin: 24px 0px;
+  padding: 23px 25px;
+}
+
 /* Use for any evor case */
 .evor_navbar{
   padding-left: 6rem !important;
+}
+
+/* Override */
+.modal-backdrop.show{
+  display: none;
 }

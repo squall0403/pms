@@ -1,4 +1,4 @@
-<div style="overflow-x:auto;">
+<div>
   <div class="team_filter">
     <!-- <select ng-model="team_filter_select">
       <option value="">All filters</option>
@@ -9,9 +9,7 @@
       <option value="Evaluator">Evaluator</option>
       <option value="Achievement">Achievement</option>
       <option value="Talent">Talent</option>
-    </select> -->
-    <input type="text" name="" placeholder="Type to filter" ng-model="team_filter_input">
-  </div>
+    </select> --><input type="text" name="" placeholder="Type to filter" ng-model="team_filter_input"> </div>
   <table class="idp_table" cellspacing=0 cellpadding=32>
     <thead>
       <tr>
@@ -23,14 +21,14 @@
         <th>Evaluator 2</th>
         <th>Period</th>
         <th style="width:10%">Status</th>
-        <th>Achievement</th>
+        <th>Objectives</th>
         <th>IDP</th>
         <th>Talent</th>
       </tr>
     </thead>
     <tbody>
       <tr class="table_row_border" ng-repeat="user in users | filter : team_filter_input || team_filter_select">
-        <td><img src="assets/images/img-avatar.png" alt=""><a href="case-2.html">{{user.full_name}}</a></td>
+        <td><img src="assets/images/img-avatar.png" alt=""><a href="#/evaluatee/{{user.achievement == 0 | iif : 'create' : 'detail'}}/{{$index}}">{{user.full_name}}</a></td>
         <td>{{user.studio}}</td>
         <td>{{user.department}}</td>
         <td>{{user.position}}</td>
@@ -38,18 +36,31 @@
         <td>{{user.evaluator2}}</td>
         <td>{{user.period}}</td>
         <td><i>{{user.status}}</i></td>
-        <td class="idp_status" ng-click="toggle('performance_review')">{{user.achievement}}%</td>
+        <td class="idp_status" ng-click="toggle('performance_review',$index)">{{user.achievement}}%</td>
         <td>{{user.idp}}%</td>
-        <td class="idp_status">{{user.talent}}</td>
+        <td class="idp_status" ng-click="toggle('talent_mapping',$index)">{{user.talent}}</td>
       </tr>
     </tbody>
   </table>
-  <div class="team_performance" id="performance_review">
+  <!-- Team Performance -->
+  <div class="team_performance" id="performance_review" style="width:44rem">
     <h1>Review Performance</h1>
-    <div class="performance_content">
-      <img src="assets/images/img-avatar.png" alt="">Someone full_name
-    </div>
-    <canvas id="performance_indi_chart" class="performance_chart"></canvas>
-    <button type="button" name="button" class="btn btn-plain" style="float:right" ng-click="toggle('performance_review')">CLOSE</button>
+    <div class="performance_content"> <img src="assets/images/img-avatar.png" alt="">{{users[talent_index].full_name}}</div> <canvas id="performance_indi_chart" class="performance_chart"></canvas> <button type="button" name="button" class="btn btn-plain" style="float:right" ng-click="toggle('performance_review')">CLOSE</button>    </div>
+  <!-- Team Performance -->
+  <!-- Talent mapping -->
+  <div class="team_performance" id="talent_mapping" style="width:26.8rem">
+    <h1>Adjust potential score</h1>
+    <div class="performance_content"> <img src="assets/images/img-avatar.png" alt="">{{users[talent_index].full_name}}</div>
+    <div class="potentail_container">
+      <p class="idp_status">Performance</p>
+      <p>{{users[talent_index].achievement}}% - {{users[talent_index].performance_score}}</p>
+      <p class="idp_status">Potential</p> <select class="modal-select" name="" style="margin-left:0" ng-model="users[talent_index].potential_score">
+        <option value="High">High</option>
+        <option value="Moderate">Moderate</option>
+        <option value="Low">Low</option>
+      </select>
+      <p class="idp_status">Talent mapping</p>
+      <p>{{users[talent_index].talent}}</p> <button type="button" name="button" class="btn btn-plain" ng-click="toggle('talent_mapping')">Cancel</button> <button type="button" name="button" class="btn btn-primary">SAVE</button> </div>
   </div>
+  <!-- Talent mapping -->
 </div>
