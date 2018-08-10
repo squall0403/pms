@@ -383,7 +383,7 @@ tr.table_row_border>td>a{
 .team_bar{
   width: 20rem;
   height: fit-content;
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 5rem;
   box-shadow: 0 11px 13px 0 rgba(187, 187, 187, 0.5);

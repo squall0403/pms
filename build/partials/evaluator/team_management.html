@@ -28,7 +28,7 @@
     </thead>
     <tbody>
       <tr class="table_row_border" ng-repeat="user in users | filter : team_filter_input || team_filter_select">
-        <td><img src="assets/images/img-avatar.png" alt=""><a href="#/evaluatee/{{user.achievement == 0 | iif : 'create' : 'detail'}}/{{$index}}">{{user.full_name}}</a></td>
+        <td><img src="assets/images/img-avatar.png" alt=""><a href="#/evaluator/{{user.achievement == 0 | iif : 'create' : 'detail'}}/{{$index}}">{{user.full_name}}</a></td>
         <td>{{user.studio}}</td>
         <td>{{user.department}}</td>
         <td>{{user.position}}</td>
@@ -56,7 +56,7 @@
       <p>{{users[talent_index].achievement}}% - {{users[talent_index].performance_score}}</p>
       <p class="idp_status">Potential</p> <select class="modal-select" name="" style="margin-left:0" ng-model="users[talent_index].potential_score">
         <option value="High">High</option>
-        <option value="Moderate">Moderate</option>
+        <option value="Moderate">Medium</option>
         <option value="Low">Low</option>
       </select>
       <p class="idp_status">Talent mapping</p>

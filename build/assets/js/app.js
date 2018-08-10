@@ -13,7 +13,8 @@ pms.controller('mainCtrl', ['$http', '$scope', function($http, $scope) {
 
 }])
 
-pms.controller('evaluator', ['$http', '$scope', function($http, $scope) {
+pms.controller('evaluator', ['$http', '$scope', '$routeParams', function($http, $scope, $routeParams) {
+  $scope.eveId = $routeParams.itemId;
   // Call user data
   $http.get(url + 'gl.json').then(function(data) {
     $scope.users = data.data;
@@ -22,18 +23,52 @@ pms.controller('evaluator', ['$http', '$scope', function($http, $scope) {
     $scope.overall_idp = 0;
     var overall = 0;
     var overall_idp = 0;
+
     $scope.users.forEach(function(user) {
       overall = overall + user.achievement;
-      overall = (overall / $scope.users.length);
-
       overall_idp = overall_idp + user.idp;
-      overall_idp = (overall_idp / $scope.users.length);
-
-      $scope.overall_achievement = overall.toFixed(0);
-      $scope.overall_idp = overall_idp.toFixed(0);
-    })
+    });
+    overall = (overall / $scope.users.length);
+    overall_idp = (overall_idp / $scope.users.length);
+    $scope.overall_achievement = overall.toFixed(0);
+    $scope.overall_idp = overall_idp.toFixed(0);
   }, function(err) {
     console.log(err);
+  });
+
+  // Call obj data
+  $http.get(url + 'Objectives.json').then(function(data) {
+    $scope.objs = data.data;
+    $scope.ref_objs = $scope.objs.slice(0, );
+  }, function(err) {
+    console.log(err);
+  });
+
+  // call sub-obj data
+  $http.get(url + 'Sub-Objectives.json').then(function(data) {
+    $scope.sub_objs = data.data;
+    $scope.sub_objs.forEach(function(item) {
+      $scope.total_score = $scope.total_score + item.achievement;
+    });
+    // Calculate total score
+    $scope.total_score = $scope.total_score.toFixed(2);
+
+    switch ($scope.total_score) {
+      case $scope.total_score < 50:
+        $scope.ranking = 'Improvements required';
+        break;
+      case $scope.total_score <= 50 && $scope.total_score < 65:
+        $scope.ranking = 'Partially meet expectation';
+        break;
+      case $scope.total_score <= 65 && $scope.total_score < 80:
+        $scope.ranking = 'Meet expectation';
+        break;
+      case $scope.total_score >= 80:
+        $scope.ranking = 'Exceed expectation';
+        break;
+    }
+  }, function(err) {
+
   });
 
   // Toggle team bar
@@ -62,7 +97,7 @@ pms.controller('evaluator', ['$http', '$scope', function($http, $scope) {
           label: "",
           backgroundColor: 'rgba(255,255,255,0)',
           borderColor: '#4265ed',
-          data: [88, 89, 88, 87, 90, 90],
+          data: [80, 65, 75, 70, 60, 85],
         }]
       },
 
@@ -84,53 +119,6 @@ pms.controller('evaluator', ['$http', '$scope', function($http, $scope) {
   }
 
   // Talenet mapping
-
-  // Select obj for comment
-
-}]);
-
-pms.controller('evaluatee', ['$http', '$scope', '$routeParams', function($http, $scope, $routeParams) {
-  $scope.eveId = $routeParams.itemId;
-  // Call user data
-  $http.get(url + 'gl.json').then(function(data) {
-    $scope.users = data.data;
-  }, function(err) {
-    console.log(err);
-  });
-
-  // Call obj data
-  $http.get(url + 'Objectives.json').then(function(data) {
-    $scope.objs = data.data;
-    $scope.ref_objs = $scope.objs.slice(0, );
-  }, function(err) {
-    console.log(err);
-  });
-
-  // call sub-obj data
-  $http.get(url + 'Sub-Objectives.json').then(function(data) {
-    $scope.sub_objs = data.data;
-    $scope.sub_objs.forEach(function(item) {
-      $scope.total_score = $scope.total_score + item.achievement;
-    });
-    $scope.total_score = $scope.total_score.toFixed(2);
-
-    switch ($scope.total_score) {
-      case $scope.total_score < 50:
-        $scope.ranking = 'Improvements required';
-        break;
-      case $scope.total_score <= 50 && $scope.total_score < 65:
-        $scope.ranking = 'Partially meet expectation';
-        break;
-      case $scope.total_score <= 65 && $scope.total_score < 80:
-        $scope.ranking = 'Meet expectation';
-        break;
-      case $scope.total_score >= 80:
-        $scope.ranking = 'Exceed expectation';
-        break;
-    }
-  }, function(err) {
-
-  });
 
   // Show team bar
   $scope.show_team = function(id) {
@@ -160,15 +148,66 @@ pms.controller('evaluatee', ['$http', '$scope', '$routeParams', function($http, 
 
   }
 
-  $scope.add_period=function(){
-      $scope.show_team('#create_new_period');
-      $('#new_period').css('display','');
+  $scope.add_period = function() {
+    $scope.show_team('#create_new_period');
+    $('#new_period').css('display', '');
   }
 
-  $scope.set_active = function(id){
-    console.log(id);
+  $scope.set_active = function(id) {
+    $scope.active_obj = id.substr(-1, 1);
     $(id).addClass('active');
+    if (id.substr(0,4) != '#obj') {
+      $scope.selected_comment = $scope.sub_objs[id.substr(-1, 1)].comment;
+      $scope.selected_rate = $scope.sub_objs[id.substr(-1, 1)].rate1;
+    }
   }
+
+  // Call obj data
+  $http.get(url + 'Objectives.json').then(function(data) {
+    $scope.objs = data.data;
+    $scope.ref_objs = $scope.objs.slice(0, );
+  }, function(err) {
+    console.log(err);
+  });
+
+  // call sub-obj data
+  // $http.get(url + 'Sub-Objectives.json').then(function(data) {
+  //   $scope.sub_objs = data.data;
+  //   $scope.sub_objs.forEach(function(item) {
+  //     $scope.total_score = $scope.total_score + item.achievement;
+  //   });
+  //   $scope.total_score = $scope.total_score.toFixed(2);
+  //
+  //   switch ($scope.total_score) {
+  //     case $scope.total_score < 50:
+  //       $scope.ranking = 'Improvements required';
+  //       break;
+  //     case $scope.total_score <= 50 && $scope.total_score < 65:
+  //       $scope.ranking = 'Partially meet expectation';
+  //       break;
+  //     case $scope.total_score <= 65 && $scope.total_score < 80:
+  //       $scope.ranking = 'Meet expectation';
+  //       break;
+  //     case $scope.total_score >= 80:
+  //       $scope.ranking = 'Exceed expectation';
+  //       break;
+  //   }
+  // }, function(err) {
+  //
+  // });
+
+}]);
+
+pms.controller('evaluatee', ['$http', '$scope', '$routeParams', function($http, $scope, $routeParams) {
+  $scope.eveId = $routeParams.itemId;
+  // Call user data
+  $http.get(url + 'gl.json').then(function(data) {
+    $scope.users = data.data;
+    $scope.num_of_users = data.data.length;
+  }, function(err) {
+    console.log(err);
+  });
+
 }]);
 
 pms.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
@@ -182,14 +221,24 @@ pms.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       controller: 'evaluator',
       title: 'Evaluator'
     })
-    .when("/evaluatee/create/:itemId", {
-      templateUrl: "partials/evaluatee/eve_create_period.html",
-      controller: 'evaluatee',
+    .when("/evaluator/create/:itemId", {
+      templateUrl: "partials/evaluator/eve_create_period.html",
+      controller: 'evaluator',
       title: 'Evaluatee'
     })
-    .when("/evaluatee/compose/:itemId", {
-      templateUrl: "partials/evaluatee/eve_compose.html",
-      controller: 'evaluatee',
+    .when("/evaluator/detail/:itemId", {
+      templateUrl: "partials/evaluator/eve_detail.html",
+      controller: 'evaluator',
+      title: 'Evaluatee'
+    })
+    .when("/evaluator/review/:itemId", {
+      templateUrl: "partials/evaluator/period_review.html",
+      controller: 'evaluator',
+      title: 'Evaluatee'
+    })
+    .when("/evaluator/compose/:itemId", {
+      templateUrl: "partials/evaluator/eve_compose.html",
+      controller: 'evaluator',
       title: 'Evaluatee'
     })
     .when("/evaluatee/:itemId", {
@@ -199,11 +248,6 @@ pms.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     })
     .when("/evaluatee/info/:itemId", {
       templateUrl: "partials/evaluatee/eve_info.html",
-      controller: 'evaluatee',
-      title: 'Evaluatee'
-    })
-    .when("/evaluatee/detail/:itemId", {
-      templateUrl: "partials/evaluator/eve_detail.html",
       controller: 'evaluatee',
       title: 'Evaluatee'
     });
