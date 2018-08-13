@@ -284,6 +284,11 @@ tr.table_row_border>td>a{
   font-weight: bold;
   cursor: pointer;
 }
+
+.idp_item{
+  color: var(--azul);
+  text-decoration: underline;
+}
 /* Main content grid */
 
 /* Modal IDP */

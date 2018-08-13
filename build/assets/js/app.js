@@ -1,5 +1,5 @@
+var url = '../assets/data/';
 // var url = '../build/assets/data/';
-var url = '../build/assets/data/';
 
 var pms = angular.module('pms', [
   'ngRoute',
@@ -13,8 +13,10 @@ pms.controller('mainCtrl', ['$http', '$scope', function($http, $scope) {
 
 }])
 
-pms.controller('evaluator', ['$http', '$scope', '$routeParams', function($http, $scope, $routeParams) {
+pms.controller('evaluator', ['$http', '$scope', '$routeParams','$location', function($http, $scope, $routeParams,$location) {
   $scope.eveId = $routeParams.itemId;
+  $scope.total_score = 0;
+  $scope.ranking = '';
   // Call user data
   $http.get(url + 'gl.json').then(function(data) {
     $scope.users = data.data;
@@ -47,25 +49,25 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams', function($http, 
   // call sub-obj data
   $http.get(url + 'Sub-Objectives.json').then(function(data) {
     $scope.sub_objs = data.data;
-    $scope.sub_objs.forEach(function(item) {
-      $scope.total_score = $scope.total_score + item.achievement;
-    });
-    // Calculate total score
-    $scope.total_score = $scope.total_score.toFixed(2);
+    $scope.achievement = 0;
 
-    switch ($scope.total_score) {
-      case $scope.total_score < 50:
-        $scope.ranking = 'Improvements required';
-        break;
-      case $scope.total_score <= 50 && $scope.total_score < 65:
-        $scope.ranking = 'Partially meet expectation';
-        break;
-      case $scope.total_score <= 65 && $scope.total_score < 80:
-        $scope.ranking = 'Meet expectation';
-        break;
-      case $scope.total_score >= 80:
-        $scope.ranking = 'Exceed expectation';
-        break;
+    $scope.sub_objs.forEach(function(item) {
+      item.achievement = (((item.rate1 + item.rate2) / 2) * item.weight / 100).toFixed(0);
+      $scope.total_score = $scope.total_score + parseInt(item.achievement);
+
+    });
+
+    // Calculate total score
+    $scope.total_score = parseInt($scope.total_score.toFixed(2));
+
+    if ($scope.total_score < 50) {
+      $scope.ranking = 'Improvements required';
+    } else if ($scope.total_score <= 50 && $scope.total_score < 65) {
+      $scope.ranking = 'Partially meet expectation';
+    } else if ($scope.total_score <= 65 && $scope.total_score < 80) {
+      $scope.ranking = 'Meet expectation';
+    } else {
+      $scope.ranking = 'Exceed expectation';
     }
   }, function(err) {
 
@@ -156,7 +158,7 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams', function($http, 
   $scope.set_active = function(id) {
     $scope.active_obj = id.substr(-1, 1);
     $(id).addClass('active');
-    if (id.substr(0,4) != '#obj') {
+    if (id.substr(0, 4) != '#obj') {
       $scope.selected_comment = $scope.sub_objs[id.substr(-1, 1)].comment;
       $scope.selected_rate = $scope.sub_objs[id.substr(-1, 1)].rate1;
     }
@@ -170,31 +172,23 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams', function($http, 
     console.log(err);
   });
 
-  // call sub-obj data
-  // $http.get(url + 'Sub-Objectives.json').then(function(data) {
-  //   $scope.sub_objs = data.data;
-  //   $scope.sub_objs.forEach(function(item) {
-  //     $scope.total_score = $scope.total_score + item.achievement;
-  //   });
-  //   $scope.total_score = $scope.total_score.toFixed(2);
-  //
-  //   switch ($scope.total_score) {
-  //     case $scope.total_score < 50:
-  //       $scope.ranking = 'Improvements required';
-  //       break;
-  //     case $scope.total_score <= 50 && $scope.total_score < 65:
-  //       $scope.ranking = 'Partially meet expectation';
-  //       break;
-  //     case $scope.total_score <= 65 && $scope.total_score < 80:
-  //       $scope.ranking = 'Meet expectation';
-  //       break;
-  //     case $scope.total_score >= 80:
-  //       $scope.ranking = 'Exceed expectation';
-  //       break;
-  //   }
-  // }, function(err) {
-  //
-  // });
+  // Call IDP data
+
+  $http.get(url + 'IDP.json').then(function(data) {
+    $scope.idps = data.data;
+  }, function(err) {
+    console.log(err);
+  })
+
+  $scope.$watch(function() {
+    return $location.path();
+  }, function(value) {
+    if (value.substr(0,4) == '/idp'){
+      $scope.navbar_selected = 'idp';
+    } else {
+      $scope.navbar_selected = 'eva';
+    }
+  })
 
 }]);
 
@@ -222,22 +216,27 @@ pms.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       title: 'Evaluator'
     })
     .when("/evaluator/create/:itemId", {
-      templateUrl: "partials/evaluator/eve_create_period.html",
+      templateUrl: "partials/evaluator/evo_create_period.html",
       controller: 'evaluator',
       title: 'Evaluatee'
     })
     .when("/evaluator/detail/:itemId", {
-      templateUrl: "partials/evaluator/eve_detail.html",
+      templateUrl: "partials/evaluator/evo_detail.html",
       controller: 'evaluator',
       title: 'Evaluatee'
     })
     .when("/evaluator/review/:itemId", {
-      templateUrl: "partials/evaluator/period_review.html",
+      templateUrl: "partials/evaluator/evo_period_review.html",
       controller: 'evaluator',
       title: 'Evaluatee'
     })
     .when("/evaluator/compose/:itemId", {
-      templateUrl: "partials/evaluator/eve_compose.html",
+      templateUrl: "partials/evaluator/evo_compose.html",
+      controller: 'evaluator',
+      title: 'Evaluatee'
+    })
+    .when("/evaluator/idp/:itemId", {
+      templateUrl: "partials/evaluator/evo_idp.html",
       controller: 'evaluator',
       title: 'Evaluatee'
     })
@@ -249,6 +248,11 @@ pms.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     .when("/evaluatee/info/:itemId", {
       templateUrl: "partials/evaluatee/eve_info.html",
       controller: 'evaluatee',
+      title: 'Evaluatee'
+    })
+    .when("/idp/:itemId", {
+      templateUrl: "partials/evaluator/evo_idp.html",
+      controller: 'evaluator',
       title: 'Evaluatee'
     });
   $locationProvider.hashPrefix('');
