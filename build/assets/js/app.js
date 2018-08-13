@@ -73,10 +73,6 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams','$location', func
 
   });
 
-  // Toggle team bar
-  $scope.show_team = function() {
-    $('#team_bar').toggle();
-  }
 
   // Team performance_chart
   function render_chart() {

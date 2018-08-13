@@ -81,6 +81,10 @@ a{
 .success{
   color: var(--success);
 }
+
+.success:hover{
+  cursor: pointer;
+}
 /* Main grid */
 .main_grid{
   display: grid;

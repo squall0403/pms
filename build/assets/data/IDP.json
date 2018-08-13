@@ -4,7 +4,7 @@
       "objective":"Proficient in using SVN/GIT features",
       "priority":"High",
       "eta":"11/31/2018",
-      "progress":57,
+      "progress":90,
       "status":"In Progress",
       "comment":"",
       "ilearn":true
@@ -14,8 +14,8 @@
       "objective":"Can setup a script to build the basic system",
       "priority":"Medium",
       "eta":"11/31/2018",
-      "progress":54,
-      "status":"In Progress",
+      "progress":100,
+      "status":"Completed",
       "comment":"",
       "ilearn":false
    },
@@ -24,8 +24,8 @@
       "objective":"Proficient in LUA",
       "priority":"Low",
       "eta":"11/31/2018",
-      "progress":52,
-      "status":"In Progress",
+      "progress":0,
+      "status":"Not started",
       "comment":"",
       "ilearn":false
    },
