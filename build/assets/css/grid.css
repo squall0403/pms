@@ -39,9 +39,7 @@ a{
   margin-right: 0px !important;
 }
 
-/* .btn{
-  margin: 27px 12px;
-  padding: 10px 30px;
+.btn{
   text-align: center;
   height: 40px;
   border-radius: 3px;
@@ -50,9 +48,9 @@ a{
   font-weight: 500;
   font-family: 'Fira Sans';
   cursor: pointer;
-  width: 7rem !important;
   padding: 0px 1rem !important;
-} */
+  /* display: inline-block !important; */
+}
 
 .btn.out_line{
   background-color: #ffffff;

@@ -1,6 +1,10 @@
 var url = '../assets/data/';
 // var url = '../build/assets/data/';
 
+var overall = 0;
+var overall_idp = 0;
+var today = new Date();
+
 var pms = angular.module('pms', [
   'ngRoute',
 ])
@@ -9,31 +13,59 @@ pms.filter('iif', function() {
     return input ? trueValue : falseValue;
   };
 });
-pms.controller('mainCtrl', ['$http', '$scope', function($http, $scope) {
 
-}])
+pms.controller('mainCtrl', ['$http', '$scope', '$routeParams', '$location', function($http, $scope, $routeParams, $location) {
+  // Define scope variable -------------------------------
 
-pms.controller('evaluator', ['$http', '$scope', '$routeParams','$location', function($http, $scope, $routeParams,$location) {
   $scope.eveId = $routeParams.itemId;
   $scope.total_score = 0;
   $scope.ranking = '';
-  // Call user data
+  $scope.talent_index = 0;
+  $scope.overall_achievement = 0;
+  $scope.overall_idp = 0;
+  $scope.added_priority = 'Normal';
+  $scope.added_idp_eta = today;
+
+  $scope.set_active = function(id) {
+    $scope.active_obj = id.substr(-1, 1);
+    $(id).addClass('active');
+    if (id.substr(0, 4) != '#obj') {
+      $scope.selected_comment = $scope.sub_objs[id.substr(-1, 1)].comment;
+      $scope.selected_rate = $scope.sub_objs[id.substr(-1, 1)].rate1;
+    }
+  }
+
+  // Call obj data
+  $http.get(url + 'Objectives.json').then(function(data) {
+    $scope.objs = data.data;
+  }, function(err) {
+    console.log(err);
+  });
+
+  // Call sub-obj data
+  $http.get(url + 'Sub-Objectives.json').then(function(data) {
+    $scope.sub_objs = data.data;
+  }, function(err) {
+    console.log(err);
+  });
+
+  // Call user data -------------------------------
   $http.get(url + 'gl.json').then(function(data) {
     $scope.users = data.data;
     $scope.num_of_users = data.data.length;
-    $scope.overall_achievement = 0;
-    $scope.overall_idp = 0;
-    var overall = 0;
-    var overall_idp = 0;
 
+
+    // calculate user overall achievement  -------------------------------
     $scope.users.forEach(function(user) {
       overall = overall + user.achievement;
       overall_idp = overall_idp + user.idp;
     });
+
     overall = (overall / $scope.users.length);
     overall_idp = (overall_idp / $scope.users.length);
     $scope.overall_achievement = overall.toFixed(0);
     $scope.overall_idp = overall_idp.toFixed(0);
+
   }, function(err) {
     console.log(err);
   });
@@ -41,30 +73,46 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams','$location', func
   // Call obj data
   $http.get(url + 'Objectives.json').then(function(data) {
     $scope.objs = data.data;
-    $scope.ref_objs = $scope.objs.slice(0, );
+
   }, function(err) {
     console.log(err);
   });
+
+  // call idp ref datas
+  $http.get(url + 'idp_ref.json').then(function(data) {
+    $scope.idp_refs = data.data;
+  }, function(err) {
+    console.log(err);
+  })
+
+  // Call IDP data
+
+  $http.get(url + 'IDP.json').then(function(data) {
+    $scope.idps = data.data;
+  }, function(err) {
+    console.log(err);
+  })
 
   // call sub-obj data
   $http.get(url + 'Sub-Objectives.json').then(function(data) {
     $scope.sub_objs = data.data;
     $scope.achievement = 0;
 
+    // calculate achieve for each sub-obj
     $scope.sub_objs.forEach(function(item) {
       item.achievement = (((item.rate1 + item.rate2) / 2) * item.weight / 100).toFixed(0);
       $scope.total_score = $scope.total_score + parseInt(item.achievement);
 
     });
 
+
     // Calculate total score
     $scope.total_score = parseInt($scope.total_score.toFixed(2));
-
     if ($scope.total_score < 50) {
       $scope.ranking = 'Improvements required';
-    } else if ($scope.total_score <= 50 && $scope.total_score < 65) {
+    } else if ($scope.total_score >= 50 && $scope.total_score < 65) {
       $scope.ranking = 'Partially meet expectation';
-    } else if ($scope.total_score <= 65 && $scope.total_score < 80) {
+    } else if ($scope.total_score >= 65 && $scope.total_score < 80) {
       $scope.ranking = 'Meet expectation';
     } else {
       $scope.ranking = 'Exceed expectation';
@@ -73,6 +121,28 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams','$location', func
 
   });
 
+  // Set active on selected navbar item
+  $scope.$watch(function() {
+    return $location.path();
+  }, function(value) {
+    if (value.substr(0, 4) == '/idp') {
+      $scope.navbar_selected = 'idp';
+    } else {
+      $scope.navbar_selected = 'eva';
+    }
+  });
+
+  // Show team bar
+  $scope.show_team = function(id) {
+    $(id).toggle();
+  }
+
+
+}])
+
+pms.controller('evaluator', ['$http', '$scope', '$routeParams', '$location', function($http, $scope, $routeParams, $location) {
+
+  $scope.eveId = $routeParams.itemId;
 
   // Team performance_chart
   function render_chart() {
@@ -108,19 +178,12 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams','$location', func
     });
   }
 
-  $scope.talent_index = 0;
+  // Render chart
   $scope.toggle = function(id, index) {
     $scope.talent_index = index;
     var target = '#' + id;
     $(target).toggle();
     render_chart();
-  }
-
-  // Talenet mapping
-
-  // Show team bar
-  $scope.show_team = function(id) {
-    $(id).toggle();
   }
 
   // calculate DAte
@@ -151,45 +214,55 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams','$location', func
     $('#new_period').css('display', '');
   }
 
-  $scope.set_active = function(id) {
-    $scope.active_obj = id.substr(-1, 1);
-    $(id).addClass('active');
-    if (id.substr(0, 4) != '#obj') {
-      $scope.selected_comment = $scope.sub_objs[id.substr(-1, 1)].comment;
-      $scope.selected_rate = $scope.sub_objs[id.substr(-1, 1)].rate1;
-    }
+  // Add idp to list
+
+  $scope.add_idp = function() {
+    $scope.idps.push({
+      "competency": $scope.added_idp,
+      "objective": $scope.added_obj_idp,
+      "priority": $scope.added_priority,
+      "eta": ('0' + ($scope.added_idp_eta.getMonth() + 1)).slice(-2) + '/' + ('0' + ($scope.added_idp_eta.getDate() + 1)).slice(-2) + '/' + $scope.added_idp_eta.getFullYear(),
+      "comment": "",
+      "ilearn": false,
+      "progress": 0,
+      "status": "Not started"
+    });
+    $scope.show_team('#modal_add');
   }
 
-  // Call obj data
-  $http.get(url + 'Objectives.json').then(function(data) {
-    $scope.objs = data.data;
-    $scope.ref_objs = $scope.objs.slice(0, );
-  }, function(err) {
-    console.log(err);
-  });
+  $scope.edit_idp = function(id, index) {
+    $(id).toggle();
+    $scope.editing_idp = $scope.idps[index];
+    $scope.editing_idp.eta = new Date($scope.editing_idp.eta);
 
-  // Call IDP data
+    if ($scope.editing_idp.progress == 0) {
+      $scope.editing_idp.status = 'Not started';
+    } else if ($scope.editing_idp.progress == 100) {
+      $scope.editing_idp.status = 'Completed';
+    } else {
+      $scope.editing_idp.status = 'In progress';
+    }
 
-  $http.get(url + 'IDP.json').then(function(data) {
-    $scope.idps = data.data;
-  }, function(err) {
-    console.log(err);
-  })
+    $scope.idps[index] = $scope.editing_idp;
+  }
 
+  // Set active on selected navbar item
   $scope.$watch(function() {
     return $location.path();
   }, function(value) {
-    if (value.substr(0,4) == '/idp'){
+    if (value.substr(0, 4) == '/idp') {
       $scope.navbar_selected = 'idp';
     } else {
       $scope.navbar_selected = 'eva';
     }
-  })
-
+  });
 }]);
 
-pms.controller('evaluatee', ['$http', '$scope', '$routeParams', function($http, $scope, $routeParams) {
+pms.controller('evaluatee', ['$http', '$scope', '$routeParams','$location', function($http, $scope, $routeParams,$location) {
+  $scope.eve_score = $scope.total_score;
+  $scope.eve_ranking = $scope.ranking;
   $scope.eveId = $routeParams.itemId;
+  $scope.eve_finish = false;
   // Call user data
   $http.get(url + 'gl.json').then(function(data) {
     $scope.users = data.data;
@@ -198,6 +271,56 @@ pms.controller('evaluatee', ['$http', '$scope', '$routeParams', function($http, 
     console.log(err);
   });
 
+  // Add idp to list
+
+  $scope.add_idp = function() {
+    $scope.idps.push({
+      "competency": $scope.added_idp,
+      "objective": $scope.added_obj_idp,
+      "priority": $scope.added_priority,
+      "eta": ('0' + ($scope.added_idp_eta.getMonth() + 1)).slice(-2) + '/' + ('0' + ($scope.added_idp_eta.getDate() + 1)).slice(-2) + '/' + $scope.added_idp_eta.getFullYear(),
+      "comment": "",
+      "ilearn": false,
+      "progress": 0,
+      "status": "Not started"
+    });
+    $scope.show_team('#modal_add');
+  }
+
+  $scope.edit_idp = function(id, index) {
+    $(id).toggle();
+    $scope.editing_idp = $scope.idps[index];
+    $scope.editing_idp.eta = new Date($scope.editing_idp.eta);
+
+    if ($scope.editing_idp.progress == 0) {
+      $scope.editing_idp.status = 'Not started';
+    } else if ($scope.editing_idp.progress == 100) {
+      $scope.editing_idp.status = 'Completed';
+    } else {
+      $scope.editing_idp.status = 'In progress';
+    }
+
+    $scope.idps[index] = $scope.editing_idp;
+  }
+
+  // Set active on selected navbar item
+  $scope.$watch(function() {
+    return $location.path();
+  }, function(value) {
+    if (value.substr(-6, 4) == '/idp') {
+      $scope.navbar_selected = 'idp';
+    } else {
+      $scope.navbar_selected = 'eva';
+    }
+  });
+
+  $scope.eve_agree = function() {
+    $scope.eve_score = 0;
+    $scope.eve_ranking = 'Completed';
+    $scope.eve_finish = true;
+
+    $location.url('evaluatee/info/' + $scope.eveId);
+  }
 }]);
 
 pms.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
@@ -241,8 +364,18 @@ pms.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       controller: 'evaluatee',
       title: 'Evaluatee'
     })
+    .when("/evaluatee/review/:itemId", {
+      templateUrl: "partials/evaluatee/eve_period_review.html",
+      controller: 'evaluatee',
+      title: 'Evaluatee'
+    })
     .when("/evaluatee/info/:itemId", {
       templateUrl: "partials/evaluatee/eve_info.html",
+      controller: 'evaluatee',
+      title: 'Evaluatee'
+    })
+    .when("/evaluatee/idp/:itemId", {
+      templateUrl: "partials/evaluatee/eve_idp.html",
       controller: 'evaluatee',
       title: 'Evaluatee'
     })

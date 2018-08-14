@@ -45,7 +45,8 @@
   <!-- Team Performance -->
   <div class="team_performance" id="performance_review" style="width:44rem">
     <h1>Review Performance</h1>
-    <div class="performance_content"> <img src="assets/images/img-avatar.png" alt="">{{users[talent_index].full_name}}</div> <canvas id="performance_indi_chart" class="performance_chart"></canvas> <button type="button" name="button" class="btn btn-plain" style="float:right" ng-click="toggle('performance_review')">CLOSE</button>    </div>
+    <div class="performance_content"> <img src="assets/images/img-avatar.png" alt="">{{users[talent_index].full_name}}</div> <canvas id="performance_indi_chart" class="performance_chart"></canvas> <button type="button" name="button" class="btn btn-plain" style="float:right;margin:2rem 0"
+      ng-click="toggle('performance_review')">CLOSE</button> </div>
   <!-- Team Performance -->
   <!-- Talent mapping -->
   <div class="team_performance" id="talent_mapping" style="width:26.8rem">
@@ -60,7 +61,7 @@
         <option value="Low">Low</option>
       </select>
       <p class="idp_status">Talent mapping</p>
-      <p>{{users[talent_index].talent}}</p> <button type="button" name="button" class="btn btn-plain" ng-click="toggle('talent_mapping')">Cancel</button> <button type="button" name="button" class="btn btn-primary">SAVE</button> </div>
+      <p>{{users[talent_index].talent}}</p><button type="button" name="button" class="btn btn-primary" style="width:100%">SAVE</button> <button type="button" name="button" class="btn btn-plain" ng-click="toggle('talent_mapping')" style="width:100%">Cancel</button>      </div>
   </div>
   <!-- Talent mapping -->
 </div>
