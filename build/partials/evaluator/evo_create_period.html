@@ -1,0 +1,126 @@
+<ng-include src="'partials/side_bar.html'"></ng-include>
+<ng-include src="'partials/evaluator/evo_header_bar.html'"></ng-include>
+<ng-include src="'partials/evaluator/evo_navbar.html'"></ng-include>
+<div class="case-1" style="padding-left:2rem" ng-controller="mainCtrl">
+  <div class="page-content">
+    <div class="top-content bg-medium-blue">
+      <div class="top-content-item active">SUMMARY 2018</div>
+    </div>
+    <div class="period-table">
+      <div class="display-table">
+        <div class="period-table-left display-table-cell">
+          <div class="container">
+            <div class="row period-row-title">
+              <div class="col period-col-title"> Finished period (0) </div>
+            </div>
+            <div class="row">
+              <div class="col font-italic"> <a href="#/evaluator/compose/{{eveId}}">
+                            <b>{{selected_period}}</b></a> </div>
+            </div>
+          </div>
+        </div>
+        <div class="period-table-right display-table-cell">
+          <div class="container">
+            <div class="row period-row-title">
+              <div class="col period-col-title"> Start date </div>
+              <div class="col period-col-title"> End date </div>
+              <div class="col period-col-title"> Duration </div>
+              <div class="col period-col-title"> Details </div>
+              <div class="col period-col-title"> Score </div>
+              <div class="col period-col-title"> Ranking </div>
+            </div>
+            <div class="row" id="new_period" style="display:none">
+              <div class="col"> {{start_date}} </div>
+              <div class="col"> {{end_date}} </div>
+              <div class="col"> {{duration}} Months </div>
+              <div class="col"> <a href="#" class="link">Not available</a> </div>
+              <div class="col"> 0% </div>
+              <div class="col"> Not evaluated </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="new-period">
+      <div class="new-period-title"> Create new period </div>
+      <div class="new-period-content">
+        <div class="new-period-content-title"> Information </div>
+        <div class="new-period-content-item display-table">
+          <div class="display-table-cell"> Evaluatee </div>
+          <div class="new-period-content-item-content display-table-cell"> {{users[eveId].full_name}} </div>
+        </div>
+        <div class="new-period-content-item display-table">
+          <div class="display-table-cell"> Job Tittle </div>
+          <div class="new-period-content-item-content display-table-cell"> {{users[eveId].job_title}} </div>
+        </div>
+        <div class="new-period-content-item display-table">
+          <div class="display-table-cell"> Position </div>
+          <div class="new-period-content-item-content display-table-cell"> {{users[eveId].position}} </div>
+        </div>
+        <div class="new-period-content-item display-table">
+          <div class="display-table-cell"> Team </div>
+          <div class="new-period-content-item-content display-table-cell"> {{users[eveId].team}} </div>
+        </div>
+        <div class="new-period-content-item display-table">
+          <div class="display-table-cell"> Department </div>
+          <div class="new-period-content-item-content display-table-cell"> {{users[eveId].department}} </div>
+        </div>
+        <div class="new-period-content-item display-table">
+          <div class="display-table-cell"> Evaluator 1 </div>
+          <div class="new-period-content-item-content display-table-cell"> {{users[eveId].evaluator1}} </div>
+        </div>
+        <div class="new-period-content-item display-table">
+          <div class="display-table-cell"> Evaluator 2 </div>
+          <div class="new-period-content-item-content display-table-cell"> {{users[eveId].evaluator2}} </div>
+        </div>
+        <div class="text-center"> <a role="button" class="btn custom-btn bg-blue" data-toggle="modal" data-target="#create_new_period">Create New Period</a> </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div id="create_new_period" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="item-left">
+                <div class="title"> Create new period </div>
+                <div class="item-left-content">
+                  <div class="first-item"> <span>Period type</span> <select type="date" class="custom-select" ng-model="selected_period" ng-change="period_change()">
+                                      <option value="S2-2018" selected>Semester 2-2018</option>
+                                      <option value="Q3-2018">Quarter 3-2018</option>
+                                      <option value="Q4-2018">Quarter 4-2018</option>
+                                      <option value="Y2018">Year 2018</option>
+                                      <option value="Custom">Custom</option>
+                                  </select> </div>
+                  <div class="second-item"> <span>STARt DAte</span> <input class="input-date" type="text" value="{{start_date}}" ng-disabled="selected_period != 'Custom'" /> </div>
+                  <div class="second-item"> <span>end DAte</span> <input class="input-date" type="text" value="{{end_date}}" ng-disabled="selected_period != 'Custom'" /> </div>
+                </div>
+                <div class="text-center"> <a role="button" class="btn custom-btn bg-blue" ng-click="add_period()">Create</a> </div>
+              </div>
+            </div>
+            <div class="col-md-6 bg-light-grey">
+              <div class="item-right">
+                <div class="item-right-content">
+                  <div class="display-table">
+                    <div class="display-table-cell"> Period </div>
+                    <div class="text-content display-table-cell"> {{selected_period}} </div>
+                  </div>
+                  <div class="display-table">
+                    <div class="display-table-cell"> Start-end </div>
+                    <div class="text-content display-table-cell"> {{start_date}} - {{end_date}} </div>
+                  </div>
+                  <div class="display-table">
+                    <div class="display-table-cell"> Duration </div>
+                    <div class="text-content display-table-cell"> {{duration}} months </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<ng-include src="'partials/side_bar.html'"></ng-include>
+<ng-include src="'partials/evaluator/evo_header_bar.html'"></ng-include>
+<ng-include src="'partials/evaluator/evo_navbar.html'"></ng-include>
+<div style="padding-left:2rem">
+  <div class="row">
+    <table class="idp_table" cellspacing=0 cellpadding=32>
+      <thead>
+        <tr>
+          <th>Competency</th>
+          <th>Objective</th>
+          <th>Priority</th>
+          <th>ETA</th>
+          <th>Progress</th>
+          <th style="width:10%">Status</th>
+          <th>Comment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table_row_border" ng-repeat="idp in idps">
+          <td><a class="idp_item" ng-href="{{idp.ilearn == true ? 'https://ilearn.gameloft.org/course/796/dad-svn' : ''}}" ng-class="{not_a : idp.ilearn != true}">{{idp.competency}}</a></td>
+          <td>{{idp.objective}}</td>
+          <td>{{idp.priority}}</td>
+          <td>{{idp.eta}}</td>
+          <td>{{idp.progress}}%</td>
+          <td ng-click="edit_idp('#modal_edit',$index)" ng-class="{success : idp.status == 'Completed',idp_status : idp.status != 'Completed'}">{{idp.status}}</td>
+          <td>{{idp.comment}}</td>
+        </tr>
+        <tr>
+          <td><button type="button" name="button" class="btn out_line" id="add_idp" ng-click="show_team('#modal_add')">add</button></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+</div>
+<!-- Modal -->
+<!-- The Modal -->
+<div id="modal_add" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">Add new competency</div>
+    <div class="modal-subheader">COMPETENCY</div> <select class="modal-select" name="" ng-model="added_idp">
+          <option ng-repeat="idp_ref in idp_refs" value="{{idp_ref.idp}}">{{idp_ref.idp}}</option>
+        </select>
+    <div class="modal-subheader">Objective</div> <input class="modal-select" value="" placeholder="Type your objective for selected competency" ng-model="added_obj_idp">
+    <div class="modal-subheader">Priority</div> <select class="modal-select" name="" ng-model="added_priority">
+        <option value="High">High</option>
+        <option value="Normal" selected>Normal</option>
+        <option value="Low">Low</option>
+      </select>
+    <div class="modal-subheader">ETA</div> <input class="modal-select" type="date" name="" value="" placeholder="2018-11-31" ng-model="added_idp_eta"> <button style="width:100%" type="button" name="button" class="btn btn-primary" ng-click='add_idp()'>ADD</button><button style="width:100%"
+      type="button" name="button" class="btn btn-plain" id="idp_cancel" ng-click="show_team('#modal_add')">cancel</button></div>
+</div>
+<div id="modal_edit" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-subheader">eta</div> <input type="date" name="" ng-model="editing_idp.eta" class="modal-select">
+    <div class="modal-subheader">progress (%)</div> <input type="number" name="" ng-model="editing_idp.progress" class="modal-select">
+    <div class="modal-subheader">status</div> <input class="modal-select" ng-model="editing_idp.status" disabled>
+    <!-- <select class="modal-select" ng-model="edit_idp.status">
+        <option value="Not Started">Not Started</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Completed">Completed</option>
+      </select> -->
+    <div class="modal-subheader">Comment</div> <textarea class="modal-select" rows="8" style="height:auto" ng-model="editing_idp.comment">{{edit_idp.comment}}</textarea> <button type="button" name="button" class="btn btn-plain" id="edit_cancel" ng-click="show_team('#modal_edit')">cancel</button>    <button type="button" name="button" class="btn btn-primary" ng-click="show_team('#modal_edit')">SAVE</button><button type="button" name="button" class="btn btn-danger" id="edit_cancel" ng-click="delete_idp()">delete</button></div>
+</div>
