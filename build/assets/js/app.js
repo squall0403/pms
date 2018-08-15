@@ -290,11 +290,12 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams', '$location', '$f
 
   $scope.set_active = function(id) {
     $scope.active_obj = id.substr(-1, 2);
-    console.log($scope.active_obj);
     $(id).addClass('active');
     if (id.substr(0, 4) != '#obj') {
       $scope.selected_comment = $('#comment' + id.substr(-2)).html();
       $scope.selected_rate = $scope.sub_objs[id.substr(-1, 1)].rate1;
+
+      console.log($scope.selected_comment);
     }
   }
 
