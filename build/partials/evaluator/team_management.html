@@ -23,12 +23,12 @@
         <th style="width:10%">Status</th>
         <th>Objectives</th>
         <th>IDP</th>
-        <th>Talent</th>
+        <th>Talent mapping</th>
       </tr>
     </thead>
     <tbody>
       <tr class="table_row_border" ng-repeat="user in users | filter : team_filter_input || team_filter_select">
-        <td><img src="assets/images/img-avatar.png" alt=""><a href="#/evaluator/{{user.achievement == 0 | iif : 'create' : 'detail'}}/{{$index}}">{{user.full_name}}</a></td>
+        <td><img src="{{user.avatar}}" alt=""><a href="#/evaluator/{{user.status == 'Not started' ? 'create' : user.status == 'Composing' ? 'compose' : user.status == 'Evaluating' ? 'detail' : 'review'}}/{{$index}}">{{user.full_name}}</a></td>
         <td>{{user.studio}}</td>
         <td>{{user.department}}</td>
         <td>{{user.position}}</td>
@@ -38,7 +38,7 @@
         <td><i>{{user.status}}</i></td>
         <td class="idp_status" ng-click="toggle('performance_review',$index)">{{user.achievement}}%</td>
         <td>{{user.idp}}%</td>
-        <td class="idp_status" ng-click="toggle('talent_mapping',$index)">{{user.talent}}</td>
+        <td class="idp_status" ng-click="toggle('talent_mapping',user.full_name)">{{user.talent}}</td>
       </tr>
     </tbody>
   </table>
@@ -51,17 +51,17 @@
   <!-- Talent mapping -->
   <div class="team_performance" id="talent_mapping" style="width:26.8rem">
     <h1>Adjust potential score</h1>
-    <div class="performance_content"> <img src="assets/images/img-avatar.png" alt="">{{users[talent_index].full_name}}</div>
+    <div class="performance_content"> <img src="{{talent.avatar}}" alt="">{{talent.full_name}}</div>
     <div class="potentail_container">
-      <p class="idp_status">Performance</p>
-      <p>{{users[talent_index].achievement}}% - {{users[talent_index].performance_score}}</p>
-      <p class="idp_status">Potential</p> <select class="modal-select" name="" style="margin-left:0" ng-model="users[talent_index].potential_score">
+      <p class="idp_status">2017 Performance</p>
+      <p>{{talent.achievement_2017}}% - {{talent.performance_score}}</p>
+      <p class="idp_status">2017 Potentiality</p> <select class="modal-select" name="" style="margin-left:0" ng-model="talent.potential_score">
         <option value="High">High</option>
         <option value="Moderate">Medium</option>
         <option value="Low">Low</option>
       </select>
-      <p class="idp_status">Talent mapping</p>
-      <p>{{users[talent_index].talent}}</p><button type="button" name="button" class="btn btn-primary" style="width:100%">SAVE</button> <button type="button" name="button" class="btn btn-plain" ng-click="toggle('talent_mapping')" style="width:100%">Cancel</button>      </div>
+      <p class="idp_status">2017 Talent mapping</p>
+      <p>{{talent.talent}}</p><button type="button" name="button" class="btn btn-primary" style="width:100%">SAVE</button> <button type="button" name="button" class="btn btn-plain" ng-click="toggle('talent_mapping')" style="width:100%">Cancel</button> </div>
   </div>
   <!-- Talent mapping -->
 </div>

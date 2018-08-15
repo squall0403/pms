@@ -1,6 +1,6 @@
 <ng-include src="'partials/evaluatee/eve_header_bar.html'"></ng-include>
 <ng-include src="'partials/evaluatee/eve_navbar.html'"></ng-include>
-<div class="case-1">
+<div class="case-1" ng-controller="mainCtrl">
   <div class="page-content">
     <div class="top-content bg-medium-blue">
       <div class="top-content-item active">SUMMARY 2018</div>
@@ -10,11 +10,12 @@
         <div class="period-table-left display-table-cell">
           <div class="container">
             <div class="row period-row-title">
-              <div class="col period-col-title"> Finished period (0) </div>
+              <div class="col period-col-title"> Period (0) </div>
             </div>
             <div class="row">
-              <div class="col font-italic"> <a href="#/evaluatee/{{eveId}}" class="not_a">
-                            <b>{{users[eveId].period}}</b></a> </div>
+              <!-- <div class="col font-italic"> <a href="#/evaluatee/{{eveId}}" class="not_a">
+                            <b>{{users[eveId].period}}</b></a> </div> -->
+              <div class="col font-italic"> <b>S2-2018</b></div>
             </div>
           </div>
         </div>
@@ -24,7 +25,7 @@
               <div class="col period-col-title"> Start date </div>
               <div class="col period-col-title"> End date </div>
               <div class="col period-col-title"> Duration </div>
-              <div class="col period-col-title"> Details </div>
+              <div class="col period-col-title"> Status </div>
               <div class="col period-col-title"> Score </div>
               <div class="col period-col-title"> Ranking </div>
             </div>
@@ -32,8 +33,8 @@
               <div class="col"> 08/08/2018 </div>
               <div class="col"> 08/11/2018 </div>
               <div class="col"> 3 Months </div>
-              <div class="col" ng-if="eve_finish == true"> <a href="#/evaluatee/{{eveId}}" class="link not_a idp_status">View period</a> </div>
-              <div class="col" ng-if="eve_finish != true"> <a href="#/evaluatee/review/{{eveId}}" class="link not_a idp_status">View period</a> </div>
+              <div class="col"> <a href="#/evaluatee/review/{{eveId}}" class="link not_a idp_status">Finished</a> </div>
+              <!-- <div class="col" ng-if="eve_finish == false"> <a href="#/evaluatee/review/{{eveId}}" class="link not_a idp_status">View period</a> </div> -->
               <div class="col"> {{eve_score}}% </div>
               <div class="col"> {{eve_ranking}} </div>
             </div>

@@ -8,7 +8,7 @@
     <div class="body-content">
       <div class="alert">
         <div class="alert-title">Click “Agree” to complete the EVALUATION, If you do not agree, please contact your line manager for more information.</div>
-        <div class="alert-button"> <button class="btn btn-secondary" ng-click="eve_agree()">agree</button></div>
+        <div class="alert-button"> <a class="btn btn-primary not_a" href="#/evaluatee/info/{{eveId}}">agree</a></div>
       </div>
       <div class="result-info">
         <div class="row">
@@ -103,24 +103,27 @@
                   <div class="percent-box bg-light-cyan"> {{sub_obj.weight}}% </div>
                 </div>
               </div>
-              <div class="display-table-cell">
+              <!-- <div class="display-table-cell">
                 <div class="widget-content-item-title">Ratings</div>
                 <div class="widget-content-item-content d-flex">
                   <div class="percent-box bg-ragular-grey">{{sub_obj.self_rate}}%</div>
                   <div class="percent-box bg-medium-cyan">{{sub_obj.rate1}}%</div>
                   <div class="percent-box bg-medium-cyan">{{sub_obj.rate2}}%</div>
                 </div>
-              </div>
+              </div> -->
               <div class="display-table-cell">
                 <div class="widget-content-item-title">Evaluatee</div>
+                <div class="percent-box bg-ragular-grey" style="margin-bottom: 1rem">{{sub_obj.self_rate}}%</div>
                 <div class="widget-content-item-content small-content">{{sub_obj.comment}}</div>
               </div>
               <div class="display-table-cell">
                 <div class="widget-content-item-title">Evaluator 1</div>
+                <div class="percent-box bg-medium-cyan" style="margin-bottom: 1rem">{{sub_obj.rate1}}%</div>
                 <div class="widget-content-item-content small-content">{{sub_obj.comment2}}</div>
               </div>
               <div class="display-table-cell">
                 <div class="widget-content-item-title">Evaluator 2</div>
+                <div class="percent-box bg-medium-cyan" style="margin-bottom: 1rem">{{sub_obj.rate2}}%</div>
                 <div class="widget-content-item-content small-content">{{sub_obj.comment2}}</div>
               </div>
               <div class="display-table-cell">

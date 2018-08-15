@@ -51,7 +51,7 @@
     <div class="modal-subheader">Objective</div> <input class="modal-select" value="" placeholder="Type your objective for selected competency" ng-model="added_obj_idp">
     <div class="modal-subheader">Priority</div> <select class="modal-select" name="" ng-model="added_priority">
         <option value="High">High</option>
-        <option value="Normal" selected>Normal</option>
+        <option value="Normal" selected>Medium</option>
         <option value="Low">Low</option>
       </select>
     <div class="modal-subheader">ETA</div> <input class="modal-select" type="date" name="" value="" placeholder="2018-11-31" ng-model="added_idp_eta"> <button style="width:100%" type="button" name="button" class="btn btn-primary" ng-click='add_idp()'>ADD</button><button style="width:100%"
@@ -68,7 +68,6 @@
         <option value="In Progress">In Progress</option>
         <option value="Completed">Completed</option>
       </select> -->
-    <div class="modal-subheader">Comment</div> <textarea class="modal-select" rows="8" style="height:auto" ng-model="editing_idp.comment">{{edit_idp.comment}}</textarea> <button type="button" name="button" class="btn btn-primary" ng-click="show_team('#modal_edit')" style="width:100%; margin-bottom:1rem">SAVE</button>
-    <button
-      type="button" name="button" class="btn btn-plain" id="edit_cancel" ng-click="show_team('#modal_edit')" style="width:100%; margin-bottom:1rem">cancel</button> <button type="button" name="button" class="btn btn-danger" id="edit_cancel" ng-click="delete_idp()" style="width:100%; margin-bottom:1rem">delete</button></div>
+    <div class="modal-subheader">Comment</div> <textarea class="modal-select" rows="8" style="height:auto" ng-model="editing_idp.comment">{{edit_idp.comment}}</textarea> <button type="button" name="button" class="btn btn-primary" ng-click="show_team('#modal_edit')" style="width:100%; margin-bottom:1rem">SAVE</button>    <button type="button" name="button" class="btn btn-plain" id="edit_cancel" ng-click="show_team('#modal_edit')" style="width:100%; margin-bottom:1rem">cancel</button> <button type="button" name="button" class="btn btn-danger" id="edit_cancel" ng-click="delete_idp()"
+      style="width:100%; margin-bottom:1rem">delete</button></div>
 </div>

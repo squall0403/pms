@@ -10,7 +10,7 @@
   </div>
   <div class="all_team"><a href="#/evaluator">All members({{num_of_users}})</a> </div>
   <ul ng-repeat="user in users">
-    <li><a href="#/evaluator/{{user.achievement == 0 | iif : 'create' : 'detail'}}/{{$index}}"><img src="assets/images/img-avatar.png" alt="">{{user.full_name}}</a></li>
+    <li><a href="#/evaluator/{{user.status == 'Not started' ? 'create' : user.status == 'Composing' ? 'compose' : user.status == 'Evaluating' ? 'detail' : 'review'}}/{{$index}}"><img src="{{user.avatar}}" alt="">{{user.full_name}}</a> <i> <span style="color:var(--warm-grey)">- {{user.status}}</span></i></li>
   </ul>
 </div>
 <!-- Sidebar -->

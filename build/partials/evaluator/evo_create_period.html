@@ -11,7 +11,7 @@
         <div class="period-table-left display-table-cell">
           <div class="container">
             <div class="row period-row-title">
-              <div class="col period-col-title"> Finished period (0) </div>
+              <div class="col period-col-title"> Period</div>
             </div>
             <div class="row">
               <div class="col font-italic"> <a href="#/evaluator/compose/{{eveId}}">
@@ -25,7 +25,8 @@
               <div class="col period-col-title"> Start date </div>
               <div class="col period-col-title"> End date </div>
               <div class="col period-col-title"> Duration </div>
-              <div class="col period-col-title"> Details </div>
+              <!-- <div class="col period-col-title"> Details </div> -->
+              <div class="col period-col-title"> Status (0 finished)</div>
               <div class="col period-col-title"> Score </div>
               <div class="col period-col-title"> Ranking </div>
             </div>
@@ -33,7 +34,8 @@
               <div class="col"> {{start_date}} </div>
               <div class="col"> {{end_date}} </div>
               <div class="col"> {{duration}} Months </div>
-              <div class="col"> <a href="#" class="link">Not available</a> </div>
+              <!-- <div class="col"> <a href="#" class="link">Not available</a> </div> -->
+              <div class="col"> <a href="#/evaluator/compose/{{eveId}}" class="link">Not started</a> </div>
               <div class="col"> 0% </div>
               <div class="col"> Not evaluated </div>
             </div>
@@ -87,11 +89,11 @@
               <div class="item-left">
                 <div class="title"> Create new period </div>
                 <div class="item-left-content">
-                  <div class="first-item"> <span>Period type</span> <select type="date" class="custom-select" ng-model="selected_period" ng-change="period_change()">
-                                      <option value="S2-2018" selected>Semester 2-2018</option>
+                  <div class="first-item"> <span>Period type</span> <select type="date" class="custom-select" ng-model="selected_period" ng-change="period_change(selected_period)">
+                                      <option value="S2-2018">Semester 2-2018</option>
                                       <option value="Q3-2018">Quarter 3-2018</option>
                                       <option value="Q4-2018">Quarter 4-2018</option>
-                                      <option value="Y2018">Year 2018</option>
+                                      <option value="Y-2018">Year 2018</option>
                                       <option value="Custom">Custom</option>
                                   </select> </div>
                   <div class="second-item"> <span>STARt DAte</span> <input class="input-date" type="text" value="{{start_date}}" ng-disabled="selected_period != 'Custom'" /> </div>

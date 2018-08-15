@@ -2,24 +2,21 @@
 <ng-include src="'partials/evaluatee/eve_navbar.html'"></ng-include>
 <div class="case-3 case-4" ng-controller="mainCtrl">
   <div class="page-content">
-    <div class="period-header">
-      <h3 class="main-title">Semester 2 - 2018 </h3> <a href="#/evaluatee/info/{{eveId}}" class="sub-title color-bright-blue">Information</a>
-      <div class="period-status"> <span>Status:</span> <span>Evaluating</span> </div>
-    </div>
+    <ng-include src="'partials/period_header.html'"></ng-include>
     <!-- <div class="page-content-wrap bg-grey"> -->
     <div class="bg-grey">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-12">
             <div class="page-body">
-              <div class="objectives">
-                <div class="widget" ng-repeat="obj in objs | filter : 'Senior'" ng-click="set_active('#obj' + $index)" id="obj{{$index}}">
+              <div class="objectives" style="margin-bottom:8rem">
+                <div class=" active" ng-repeat="obj in objs | filter : 'Senior'">
                   <div class="d-flex justify-content-between">
                     <div class="widget-title">Objective {{$index + 1}}</div>
                   </div>
                   <div class="widget-big-title">{{obj.objective}}</div>
                   <div class="widget-content">
-                    <div class="widget-content-item display-table" ng-repeat="sub_obj in sub_objs | filter:obj.objective | filter : 'Senior'" ng-click="set_active('#sub_obj' + $parent.$index + $index)" ng-class="{active:$index == selected_sub}" id="sub_obj{{$parent.$index}}{{$index}}">
+                    <div class="widget-content-item display-table" ng-repeat="sub_obj in sub_objs | filter:obj.objective | filter : 'Senior'" id="sub_obj{{$parent.$index}}{{$index}}">
                       <div class="display-table-cell">
                         <div class="widget-content-item-title">Sub-objective {{$index +1}}</div>
                         <div class="widget-content-item-content"> {{sub_obj.sub_objectives}} </div>
@@ -32,37 +29,35 @@
                         <div class="widget-content-item-title">Weight</div>
                         <div class="widget-content-item-content"> {{sub_obj.weight}}% </div>
                       </div>
-                      <div class="display-table-cell">
+                      <!-- <div class="display-table-cell">
                         <div class="widget-content-item-title">Comment</div>
                         <div class="widget-content-item-content"> I have completely finished this objective. </div>
-                      </div>
-                    </div>
+                      </div> --></div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
             <div class="page-body" style="height:100%">
               <div class="composing bg-white" style="height:100%">
                 <div class="composing-title">
-                  <h3>Evaluation</h3> </div>
+                  <h3>Self-Evaluation</h3> </div>
                 <div class="composing-body">
-                  <div class="form-group"> <label for="weight">Self-rating</label> <input type="number" id="weight" class="form-control number-only" placeholder="0" ng-model="selected_rate"> </div>
+                  <div class="form-group"> <label for="weight">Rate (%)</label> <input type="number" id="weight" class="form-control number-only" placeholder="0" ng-model="selected_rate"> </div>
                   <div class="form-group"> <label for="comment1">Comment</label> <textarea class="form-control" id="comment1" rows="5">{{selected_comment}}</textarea> </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </div> --></div>
       </div>
     </div>
-    <div class="footer-toast on bg-white">
+    <div class="footer-toast on bg-white" style="margin-left:0">
       <div class="row">
         <div class="col-sm-8 d-flex align-items-center">
-          <div class="footer-toast-content color-warm-grey"> <span>Click “Save” to save your evaluation. If you wish to finish, click "Finish evaluation".</span> </div>
+          <div class="footer-toast-content color-warm-grey"> <span>A request for agreement on objectives has been sent to you. If you agree with the objectives, click “Agree”.  If you do not agree, please discuss directly with your line manager</span> </div>
         </div>
-        <div class="col-sm-4 d-flex align-items-center btn-inline-group"> <button class="btn btn-submit">Save</button> <a class="btn btn-ask not_a" style="padding:0px 10px" ng-href="#/evaluatee/review/{{eveId}}">Finish evaluation</a> </div>
+        <div class="col-sm-4 d-flex align-items-center btn-inline-group"> <a class="btn btn-submit not_a" style="padding:0px 10px" ng-href="#/evaluatee/detail/{{eveId}}">Agree</a> </div>
       </div>
     </div>
   </div>

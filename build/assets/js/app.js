@@ -8,13 +8,16 @@ var today = new Date();
 var pms = angular.module('pms', [
   'ngRoute',
 ])
+
+
+
 pms.filter('iif', function() {
   return function(input, trueValue, falseValue) {
     return input ? trueValue : falseValue;
   };
 });
 
-pms.controller('mainCtrl', ['$http', '$scope', '$routeParams', '$location', function($http, $scope, $routeParams, $location) {
+pms.controller('mainCtrl', ['$http', '$scope', '$routeParams', '$location', '$filter', function($http, $scope, $routeParams, $location, $filter) {
   // Define scope variable -------------------------------
 
   $scope.eveId = $routeParams.itemId;
@@ -23,17 +26,14 @@ pms.controller('mainCtrl', ['$http', '$scope', '$routeParams', '$location', func
   $scope.talent_index = 0;
   $scope.overall_achievement = 0;
   $scope.overall_idp = 0;
-  $scope.added_priority = 'Normal';
+  $scope.added_priority = 'Medium';
   $scope.added_idp_eta = today;
+  $scope.active_obj = 0;
+  $scope.end_date = '11/30/2018';
+  $scope.start_date = '06/01/2018';
+  $scope.duration = 6;
+  $scope.idpId = 0
 
-  $scope.set_active = function(id) {
-    $scope.active_obj = id.substr(-1, 1);
-    $(id).addClass('active');
-    if (id.substr(0, 4) != '#obj') {
-      $scope.selected_comment = $scope.sub_objs[id.substr(-1, 1)].comment;
-      $scope.selected_rate = $scope.sub_objs[id.substr(-1, 1)].rate1;
-    }
-  }
 
   // Call obj data
   $http.get(url + 'Objectives.json').then(function(data) {
@@ -73,6 +73,7 @@ pms.controller('mainCtrl', ['$http', '$scope', '$routeParams', '$location', func
   // Call obj data
   $http.get(url + 'Objectives.json').then(function(data) {
     $scope.objs = data.data;
+    $scope.ref_objs = Array.from($scope.objs);
 
   }, function(err) {
     console.log(err);
@@ -96,6 +97,7 @@ pms.controller('mainCtrl', ['$http', '$scope', '$routeParams', '$location', func
   // call sub-obj data
   $http.get(url + 'Sub-Objectives.json').then(function(data) {
     $scope.sub_objs = data.data;
+
     $scope.achievement = 0;
 
     // calculate achieve for each sub-obj
@@ -121,6 +123,12 @@ pms.controller('mainCtrl', ['$http', '$scope', '$routeParams', '$location', func
 
   });
 
+  // get ref sub_objs
+    $http.get(url + 'Sub-Objectives_ref.json').then(function(data){
+        $scope.ref_sub_objs = data.data;
+    },function(err){
+      console.log(err);
+    })
   // Set active on selected navbar item
   $scope.$watch(function() {
     return $location.path();
@@ -137,10 +145,9 @@ pms.controller('mainCtrl', ['$http', '$scope', '$routeParams', '$location', func
     $(id).toggle();
   }
 
-
 }])
 
-pms.controller('evaluator', ['$http', '$scope', '$routeParams', '$location', function($http, $scope, $routeParams, $location) {
+pms.controller('evaluator', ['$http', '$scope', '$routeParams', '$location', '$filter', function($http, $scope, $routeParams, $location, $filter) {
 
   $scope.eveId = $routeParams.itemId;
 
@@ -160,7 +167,7 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams', '$location', fun
 
       // The data for our dataset
       data: {
-        labels: ["S1/16", "S2/16", "S1/17", "S2/17", "S1/18", "S2/18"],
+        labels: ["S2-2015", "S1-2016", "S2-2016", "S1-2017", "S2-2017", "S1-2018"],
         datasets: [{
           label: "",
           backgroundColor: 'rgba(255,255,255,0)',
@@ -180,33 +187,41 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams', '$location', fun
 
   // Render chart
   $scope.toggle = function(id, index) {
-    $scope.talent_index = index;
+
+    $scope.talent = $scope.users.find(function(users) {
+      return users.full_name == index;
+    }, 'users.index');
+
     var target = '#' + id;
     $(target).toggle();
     render_chart();
   }
 
   // calculate DAte
-  $scope.period_change = function() {
-    switch ($scope.selected_period) {
+  $scope.period_change = function(period) {
+
+    switch (period) {
       case 'S2-2018':
-        $scope.end_date = '11/31/2018';
-        $scope.start_date = '07/01/2018';
+        $scope.end_date = '11/30/2018';
+        $scope.start_date = '06/01/2018';
         break;
       case 'Q3-2018':
-        $scope.end_date = '09/31/2018';
+        $scope.end_date = '09/30/2018';
         $scope.start_date = '07/01/2018';
         break;
       case 'Q4-2018':
-        $scope.end_date = '11/31/2018';
+        $scope.end_date = '12/31/2018';
         $scope.start_date = '10/01/2018';
         break;
+      case 'Y-2018':
+        $scope.end_date = '12/31/2018';
+        $scope.start_date = '01/01/2018';
+        break;
       default:
-        $scope.end_date = '11/31/2018';
-        $scope.start_date = '07/01/2018';
+        $scope.end_date = '11/30/2018';
+        $scope.start_date = '06/01/2018';
     }
-    $scope.duration = (new Date($scope.end_date)).getMonth() - (new Date($scope.start_date)).getMonth();
-
+    $scope.duration = (new Date($scope.end_date)).getMonth() - (new Date($scope.start_date)).getMonth() + 1;
   }
 
   $scope.add_period = function() {
@@ -232,9 +247,14 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams', '$location', fun
 
   $scope.edit_idp = function(id, index) {
     $(id).toggle();
+    $scope.idpId = index;
+    console.log($scope.idpId);
     $scope.editing_idp = $scope.idps[index];
     $scope.editing_idp.eta = new Date($scope.editing_idp.eta);
 
+  }
+
+  $scope.save_edit_idp = function(index) {
     if ($scope.editing_idp.progress == 0) {
       $scope.editing_idp.status = 'Not started';
     } else if ($scope.editing_idp.progress == 100) {
@@ -242,8 +262,10 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams', '$location', fun
     } else {
       $scope.editing_idp.status = 'In progress';
     }
-
+    $scope.editing_idp.eta = ('0' + ($scope.editing_idp.eta.getMonth() + 1)).slice(-2) + '/' + ('0' + ($scope.editing_idp.eta.getDate() + 1)).slice(-2) + '/' + $scope.editing_idp.eta.getFullYear();
     $scope.idps[index] = $scope.editing_idp;
+
+    $scope.show_team('#modal_edit');
   }
 
   // Set active on selected navbar item
@@ -256,13 +278,46 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams', '$location', fun
       $scope.navbar_selected = 'eva';
     }
   });
+
+  // Delete objs
+  $scope.delete_obj = function(index) {
+    $scope.objs.splice(index, 1);
+  }
+
+  $scope.delete_sub_obj = function(index) {
+    $scope.sub_objs.splice(index, 1);
+  }
+
+  $scope.set_active = function(id) {
+    $scope.active_obj = id.substr(-1, 2);
+    console.log($scope.active_obj);
+    $(id).addClass('active');
+    if (id.substr(0, 4) != '#obj') {
+      $scope.selected_comment = $('#comment' + id.substr(-2)).html();
+      $scope.selected_rate = $scope.sub_objs[id.substr(-1, 1)].rate1;
+    }
+  }
+
+  $scope.add_obj_from_ref = function(index) {
+    $scope.objs[index.id - 1].level = 'Senior';
+    var ss = [];
+    ss = $filter('filter')($scope.sub_objs, $scope.objs[index.id - 1].objective);
+    ss.forEach(function(value, index) {
+      value.level = 'Senior';
+    })
+  }
+
+    $scope.add_sub_obj_from_ref = function(index) {
+      console.log(index);
+      $scope.sub_objs.push(index);
+    }
+
 }]);
 
-pms.controller('evaluatee', ['$http', '$scope', '$routeParams','$location', function($http, $scope, $routeParams,$location) {
+pms.controller('evaluatee', ['$http', '$scope', '$routeParams', '$location', function($http, $scope, $routeParams, $location) {
   $scope.eve_score = $scope.total_score;
   $scope.eve_ranking = $scope.ranking;
   $scope.eveId = $routeParams.itemId;
-  $scope.eve_finish = false;
   // Call user data
   $http.get(url + 'gl.json').then(function(data) {
     $scope.users = data.data;
@@ -314,13 +369,15 @@ pms.controller('evaluatee', ['$http', '$scope', '$routeParams','$location', func
     }
   });
 
-  $scope.eve_agree = function() {
-    $scope.eve_score = 0;
-    $scope.eve_ranking = 'Completed';
-    $scope.eve_finish = true;
-
-    $location.url('evaluatee/info/' + $scope.eveId);
+  $scope.set_active = function(id) {
+    $scope.active_obj = id.substr(-1, 2);
+    $(id).addClass('active');
+    if (id.substr(0, 4) != '#obj') {
+      $scope.selected_comment = $('#comment' + id.substr(-2)).html();
+      $scope.selected_rate = $scope.sub_objs[id.substr(-1, 1)].rate1;
+    }
   }
+
 }]);
 
 pms.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
@@ -340,17 +397,17 @@ pms.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       title: 'Evaluatee'
     })
     .when("/evaluator/detail/:itemId", {
-      templateUrl: "partials/evaluator/evo_detail.html",
+      templateUrl: "partials/evaluator/evo_detail_full.html",
       controller: 'evaluator',
       title: 'Evaluatee'
     })
     .when("/evaluator/review/:itemId", {
-      templateUrl: "partials/evaluator/evo_period_review.html",
+      templateUrl: "partials/evaluator/evo_period_review_full.html",
       controller: 'evaluator',
       title: 'Evaluatee'
     })
     .when("/evaluator/compose/:itemId", {
-      templateUrl: "partials/evaluator/evo_compose.html",
+      templateUrl: "partials/evaluator/evo_compose_full.html",
       controller: 'evaluator',
       title: 'Evaluatee'
     })
@@ -361,6 +418,11 @@ pms.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     })
     .when("/evaluatee/:itemId", {
       templateUrl: "partials/evaluatee/index.html",
+      controller: 'evaluatee',
+      title: 'Evaluatee'
+    })
+    .when("/evaluatee/detail/:itemId", {
+      templateUrl: "partials/evaluatee/eve_detail.html",
       controller: 'evaluatee',
       title: 'Evaluatee'
     })

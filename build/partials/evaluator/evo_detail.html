@@ -14,28 +14,35 @@
           <div class="col-md-8">
             <div class="page-body">
               <div class="objectives">
-                <div class="widget" ng-repeat="obj in objs | filter:'Senior'" ng-click="set_active('#obj' + $index)" id="obj{{$index}}">
-                  <div class="d-flex justify-content-between">
-                    <div class="widget-title">Objective {{$index + 1}}</div>
-                  </div>
-                  <div class="widget-big-title">{{obj.objective}}</div>
+                <!-- <div class="widget" ng-repeat="obj in objs | filter:'Senior'" ng-click="set_active('#obj' + $index)" id="obj{{$index}}"> -->
+                <div class="widget" style="opacity:1">
                   <div class="widget-content">
-                    <div class="widget-content-item display-table" ng-repeat="sub_obj in sub_objs |filter: 'Senior' |filter: obj.objective" ng-click="set_active('#sub_obj' + $parent.$index + $index)" ng-class="{active:$index == selected_sub}" id="sub_obj{{$parent.$index}}{{$index}}">
+                    <div class="widget-content-item display-table">
                       <div class="display-table-cell">
-                        <div class="widget-content-item-title">Sub-objective {{$index +1}}</div>
-                        <div class="widget-content-item-content"> {{sub_obj.sub_objectives}} </div>
+                        <div class="widget-content-item-title">Sub-objective</div>
                       </div>
                       <div class="display-table-cell">
                         <div class="widget-content-item-title">ETA</div>
-                        <div class="widget-content-item-content"> {{sub_obj.eta}} </div>
                       </div>
                       <div class="display-table-cell">
                         <div class="widget-content-item-title">Weight</div>
-                        <div class="widget-content-item-content"> {{sub_obj.weight}}% </div>
                       </div>
                       <div class="display-table-cell">
                         <div class="widget-content-item-title">Comment</div>
-                        <div class="widget-content-item-content">{{sub_obj.comment}}</div>
+                      </div>
+                    </div>
+                    <div class="widget-content-item display-table" ng-repeat="sub_obj in sub_objs" ng-click="set_active('#sub_obj' + $index)" ng-class="{active:$index == selected_sub}" id="sub_obj{{$index}}">
+                      <div class="display-table-cell">
+                        <div class="widget-content-item-content"> {{sub_obj.sub_objectives}} </div>
+                      </div>
+                      <div class="display-table-cell">
+                        <div class="widget-content-item-content"> {{sub_obj.eta}} </div>
+                      </div>
+                      <div class="display-table-cell">
+                        <div class="widget-content-item-content"> {{sub_obj.weight}}% </div>
+                      </div>
+                      <div class="display-table-cell">
+                        <div class="widget-content-item-content" id="comment{{$index}}">{{sub_obj.comment2}}</div>
                       </div>
                     </div>
                   </div>
@@ -49,8 +56,9 @@
                 <div class="composing-title">
                   <h3>Evaluation</h3> </div>
                 <div class="composing-body">
-                  <div class="form-group"> <label for="weight">Rate</label> <input type="number" id="weight" class="form-control number-only" placeholder="" ng-model="selected_rate"> </div>
+                  <div class="form-group"> <label for="weight">Rate (%)</label> <input type="number" id="weight" class="form-control number-only" placeholder="" ng-model="selected_rate"> </div>
                   <div class="form-group"> <label for="comment1">Comment</label> <textarea class="form-control" id="comment1" rows="5" ng-model="selected_comment"></textarea> </div>
+                  <div class="form-group"> <label for="comment1"><b>General Comment for S2-2018</b></label> <textarea class="form-control" id="comment1" rows="8"></textarea> </div>
                 </div>
               </div>
             </div>
@@ -61,7 +69,7 @@
     <div class="footer-toast on bg-white">
       <div class="row">
         <div class="col-sm-8 d-flex align-items-center">
-          <div class="footer-toast-content color-warm-grey"> <span>Click “Save” to save your evaluation. If you wish to finish, click "Visible to evaluatee".</span> </div>
+          <div class="footer-toast-content color-warm-grey"> <span>Click “Save” to save your evaluation. If you wish to finish your evaluation, click "Visible to evaluatee".</span> </div>
         </div>
         <div class="col-sm-4 d-flex align-items-center btn-inline-group"> <button class="btn btn-submit">Save</button> <a class="btn btn-ask not_a" style="padding:0px 10px" ng-href="#/evaluator/review/{{eveId}}">visible to evaluatee</a> </div>
       </div>
