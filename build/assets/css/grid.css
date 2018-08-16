@@ -50,6 +50,7 @@ a{
   cursor: pointer;
   padding: 0px 1rem !important;
   /* display: inline-block !important; */
+  margin: 0.5rem 0px;
 }
 
 .btn.out_line{
@@ -524,11 +525,19 @@ tr.table_row_border>td>a{
   width: 100%;
 }
 
-.potentail_container{
+.potential_container{
   margin: 24px 0px;
   padding: 23px 25px;
 }
 
+.potential_group{
+  margin-bottom: 3rem;
+}
+
+.potential_title{
+  color: black;
+  opacity: 0.5;
+}
 /* Use for any evor case */
 .evor_navbar{
   padding-left: 6rem !important;

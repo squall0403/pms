@@ -403,12 +403,12 @@ pms.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       title: 'Evaluatee'
     })
     .when("/evaluator/review/:itemId", {
-      templateUrl: "partials/evaluator/evo_period_review_full.html",
+      templateUrl: "partials/evaluator/evo_period_review.html",
       controller: 'evaluator',
       title: 'Evaluatee'
     })
     .when("/evaluator/compose/:itemId", {
-      templateUrl: "partials/evaluator/evo_compose_full.html",
+      templateUrl: "partials/evaluator/evo_compose.html",
       controller: 'evaluator',
       title: 'Evaluatee'
     })
