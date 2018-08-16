@@ -374,18 +374,6 @@ tr.table_row_border>td>a{
   margin-top: 31px;
 }
 
-.evor_side_bar>.icon-chart{
-  font-size: 24px;
-  color: white;
-  margin-top: 52px;
-  cursor: pointer;
-}
-.evor_side_bar>.icon-people{
-  font-size: 24px;
-  color: white;
-  margin-top: 52px;
-  cursor: pointer;
-}
 
 .team_bar{
   width: 20rem;
@@ -524,9 +512,20 @@ tr.table_row_border>td>a{
   width: 100%;
 }
 
-.potentail_container{
+.potential_container{
   margin: 24px 0px;
-  padding: 23px 25px;
+  /* padding: 23px 25px; */
+}
+
+.potential_group{
+  padding-bottom: 30px;
+  padding: 10px;
+}
+
+
+.potential_title{
+  color: black;
+  opacity: 0.5;
 }
 
 /* Use for any evor case */

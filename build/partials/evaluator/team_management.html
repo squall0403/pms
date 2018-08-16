@@ -28,7 +28,7 @@
     </thead>
     <tbody>
       <tr class="table_row_border" ng-repeat="user in users | filter : team_filter_input || team_filter_select">
-        <td><img src="{{user.avatar}}" alt=""><a href="#/evaluator/{{user.status == 'Not started' ? 'create' : user.status == 'Composing' ? 'compose' : user.status == 'Evaluating' ? 'detail' : 'review'}}/{{$index}}">{{user.full_name}}</a></td>
+        <td><img ng-src="{{user.avatar}}" alt=""><a href="#/evaluator/{{user.status == 'Not started' ? 'create' : user.status == 'Composing' ? 'compose' : user.status == 'Evaluating' ? 'detail' : 'review'}}/{{$index}}">{{user.full_name}}</a></td>
         <td>{{user.studio}}</td>
         <td>{{user.department}}</td>
         <td>{{user.position}}</td>
@@ -45,23 +45,27 @@
   <!-- Team Performance -->
   <div class="team_performance" id="performance_review" style="width:44rem">
     <h1>Review Performance</h1>
-    <div class="performance_content"> <img src="assets/images/img-avatar.png" alt="">{{users[talent_index].full_name}}</div> <canvas id="performance_indi_chart" class="performance_chart"></canvas> <button type="button" name="button" class="btn btn-plain" style="float:right;margin:2rem 0"
-      ng-click="toggle('performance_review')">CLOSE</button> </div>
+    <div class="performance_content"> <img ng-src="{{talent.avatar}}" alt="">{{users[talent_index].full_name}}</div> <canvas id="performance_indi_chart" class="performance_chart"></canvas> <button type="button" name="button" class="btn btn-plain" style="float:right;margin:2rem 0" ng-click="toggle('performance_review')">CLOSE</button>    </div>
   <!-- Team Performance -->
   <!-- Talent mapping -->
   <div class="team_performance" id="talent_mapping" style="width:26.8rem">
     <h1>Adjust potential score</h1>
     <div class="performance_content"> <img src="{{talent.avatar}}" alt="">{{talent.full_name}}</div>
-    <div class="potentail_container">
-      <p class="idp_status">2017 Performance</p>
-      <p>{{talent.achievement_2017}}% - {{talent.performance_score}}</p>
-      <p class="idp_status">2017 Potentiality</p> <select class="modal-select" name="" style="margin-left:0" ng-model="talent.potential_score">
-        <option value="High">High</option>
-        <option value="Moderate">Medium</option>
-        <option value="Low">Low</option>
-      </select>
-      <p class="idp_status">2017 Talent mapping</p>
-      <p>{{talent.talent}}</p><button type="button" name="button" class="btn btn-primary" style="width:100%">SAVE</button> <button type="button" name="button" class="btn btn-plain" ng-click="toggle('talent_mapping')" style="width:100%">Cancel</button> </div>
+    <div class="potential_container">
+      <div class="potential_group">
+        <p class="potential_title">2017 Performance</p>
+        <p>{{talent.achievement_2017}}% - {{talent.performance_score}}</p>
+      </div>
+      <div class="potential_group" id="potential_edit">
+        <p class="potential_title">2017 Potentiality</p> <select class="modal-select" name="" style="margin-left:0" ng-model="talent.potential_score">
+          <option value="High">High</option>
+          <option value="Moderate">Medium</option>
+          <option value="Low">Low</option>
+        </select> </div>
+      <div class="potential_group">
+        <p class="potential_title">2017 Talent mapping</p>
+        <p>{{talent.talent}}</p>
+      </div> <button type="button" name="button" class="btn btn-primary" style="width:100%">SAVE</button> <button type="button" name="button" class="btn btn-plain" ng-click="toggle('talent_mapping')" style="width:100%">Cancel</button> </div>
   </div>
   <!-- Talent mapping -->
 </div>

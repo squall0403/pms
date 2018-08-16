@@ -32,7 +32,8 @@ pms.controller('mainCtrl', ['$http', '$scope', '$routeParams', '$location', '$fi
   $scope.end_date = '11/30/2018';
   $scope.start_date = '06/01/2018';
   $scope.duration = 6;
-  $scope.idpId = 0
+  $scope.idpId = 0;
+  $scope.selected_ref_obj = "Quality Delivery/Customer Satisfaction";
 
 
   // Call obj data
@@ -289,28 +290,46 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams', '$location', '$f
   }
 
   $scope.set_active = function(id) {
+    $('#edit_from_ref').css('display','block');
     $scope.active_obj = id.substr(-1, 2);
     $(id).addClass('active');
     if (id.substr(0, 4) != '#obj') {
       $scope.selected_comment = $('#comment' + id.substr(-2)).html();
       $scope.selected_rate = $scope.sub_objs[id.substr(-1, 1)].rate1;
-
-      console.log($scope.selected_comment);
     }
   }
 
   $scope.add_obj_from_ref = function(index) {
+
+    if (index == null) {
+      $('#edit_from_ref').css('display','none');
+      $('#edit_blank').css('display','block');
+    } else {
+      $('#edit_from_ref').css('display','block');
+      $('#edit_blank').css('display','none');
+    }
     $scope.objs[index.id - 1].level = 'Senior';
     var ss = [];
-    ss = $filter('filter')($scope.sub_objs, $scope.objs[index.id - 1].objective);
+    ss = $filter('filter')($scope.ref_sub_objs, $scope.objs[index.id - 1].objective);
+
     ss.forEach(function(value, index) {
-      value.level = 'Senior';
-    })
+
+      if ($scope.sub_objs.find(function(element){
+        return element != value
+      })) {
+        $scope.sub_objs.push(value);
+      }
+
+    });
   }
 
     $scope.add_sub_obj_from_ref = function(index) {
       console.log(index);
       $scope.sub_objs.push(index);
+    }
+
+    $scope.new_blank_sub_obj = function(){
+      $('#blank_task_list').append('<div class="task-list-item d-flex align-items-center"><div class="task-list-item-inputs bg-pale-grey"><div class="form-group "><label for="sub1">Sub-objective</label> <textarea class="form-control" id="sub1 " rows="5"></textarea> </div><div class="form-group"> <label for="weight">Weight (%)</label> <input type="number" id="weight" class="form-control number-only"> </div><div class="form-group active "> <label for="eta ">ETA</label><input class="input-date " type="date " value="" /> </div></div><div class="task-list-item-operates"><a href="javascript:void(0) " class="action action-remove not_a " ng-click="delete_sub_obj($index) "><span class="icon-close "></span></a> </div></div>');
     }
 
 }]);
@@ -381,6 +400,40 @@ pms.controller('evaluatee', ['$http', '$scope', '$routeParams', '$location', fun
 
 }]);
 
+pms.controller('dashboard',['$http','$scope',function($http,$scope){
+  var ctx = document.getElementById('myChart').getContext('2d');
+  Chart.scaleService.updateScaleDefaults('linear', {
+    ticks: {
+      min: 0,
+      max: 100,
+      stepSize: 20
+    }
+  });
+  var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+      labels: ["S2-2015", "S1-2016", "S2-2016", "S1-2017", "S2-2017", "S1-2018"],
+      datasets: [{
+        label: "",
+        backgroundColor: 'rgba(255,255,255,0)',
+        borderColor: '#4265ed',
+        data: [80, 65, 75, 70, 60, 85],
+      }]
+    },
+
+    // Configuration options go here
+    options: {
+      legend: {
+        display: false
+      }
+    }
+  });
+
+}]);
+
 pms.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $routeProvider
     .when("/", {
@@ -415,6 +468,11 @@ pms.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     .when("/evaluator/idp/:itemId", {
       templateUrl: "partials/evaluator/evo_idp.html",
       controller: 'evaluator',
+      title: 'Evaluatee'
+    })
+    .when("/evaluator/dashboard", {
+      templateUrl: "partials/evaluator/evo_dashboard.html",
+      controller: 'dashboard',
       title: 'Evaluatee'
     })
     .when("/evaluatee/:itemId", {
