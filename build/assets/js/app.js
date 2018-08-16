@@ -1,5 +1,6 @@
 var url = '../assets/data/';
 // var url = '../build/assets/data/';
+// var url = '../pms/assets/data/';
 
 var overall = 0;
 var overall_idp = 0;
@@ -125,11 +126,11 @@ pms.controller('mainCtrl', ['$http', '$scope', '$routeParams', '$location', '$fi
   });
 
   // get ref sub_objs
-    $http.get(url + 'Sub-Objectives_ref.json').then(function(data){
-        $scope.ref_sub_objs = data.data;
-    },function(err){
-      console.log(err);
-    })
+  $http.get(url + 'Sub-Objectives_ref.json').then(function(data) {
+    $scope.ref_sub_objs = data.data;
+  }, function(err) {
+    console.log(err);
+  })
   // Set active on selected navbar item
   $scope.$watch(function() {
     return $location.path();
@@ -249,7 +250,6 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams', '$location', '$f
   $scope.edit_idp = function(id, index) {
     $(id).toggle();
     $scope.idpId = index;
-    console.log($scope.idpId);
     $scope.editing_idp = $scope.idps[index];
     $scope.editing_idp.eta = new Date($scope.editing_idp.eta);
 
@@ -290,7 +290,7 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams', '$location', '$f
   }
 
   $scope.set_active = function(id) {
-    $('#edit_from_ref').css('display','block');
+    $('#edit_from_ref').css('display', 'block');
     $scope.active_obj = id.substr(-1, 2);
     $(id).addClass('active');
     if (id.substr(0, 4) != '#obj') {
@@ -302,11 +302,11 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams', '$location', '$f
   $scope.add_obj_from_ref = function(index) {
 
     if (index == null) {
-      $('#edit_from_ref').css('display','none');
-      $('#edit_blank').css('display','block');
+      $('#edit_from_ref').css('display', 'none');
+      $('#edit_blank').css('display', 'block');
     } else {
-      $('#edit_from_ref').css('display','block');
-      $('#edit_blank').css('display','none');
+      $('#edit_from_ref').css('display', 'block');
+      $('#edit_blank').css('display', 'none');
     }
     $scope.objs[index.id - 1].level = 'Senior';
     var ss = [];
@@ -314,23 +314,23 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams', '$location', '$f
 
     ss.forEach(function(value, index) {
 
-      if ($scope.sub_objs.find(function(element){
-        return element != value
-      })) {
+      if ($scope.sub_objs.find(function(element) {
+          return element != value
+        })) {
         $scope.sub_objs.push(value);
       }
 
     });
   }
 
-    $scope.add_sub_obj_from_ref = function(index) {
-      console.log(index);
-      $scope.sub_objs.push(index);
-    }
+  $scope.add_sub_obj_from_ref = function(index) {
+    console.log(index);
+    $scope.sub_objs.push(index);
+  }
 
-    $scope.new_blank_sub_obj = function(){
-      $('#blank_task_list').append('<div class="task-list-item d-flex align-items-center"><div class="task-list-item-inputs bg-pale-grey"><div class="form-group "><label for="sub1">Sub-objective</label> <textarea class="form-control" id="sub1 " rows="5"></textarea> </div><div class="form-group"> <label for="weight">Weight (%)</label> <input type="number" id="weight" class="form-control number-only"> </div><div class="form-group active "> <label for="eta ">ETA</label><input class="input-date " type="date " value="" /> </div></div><div class="task-list-item-operates"><a href="javascript:void(0) " class="action action-remove not_a " ng-click="delete_sub_obj($index) "><span class="icon-close "></span></a> </div></div>');
-    }
+  $scope.new_blank_sub_obj = function() {
+    $('#blank_task_list').append('<div class="task-list-item d-flex align-items-center"><div class="task-list-item-inputs bg-pale-grey"><div class="form-group "><label for="sub1">Sub-objective</label> <textarea class="form-control" id="sub1 " rows="5"></textarea> </div><div class="form-group"> <label for="weight">Weight (%)</label> <input type="number" id="weight" class="form-control number-only"> </div><div class="form-group active "> <label for="eta ">ETA</label><input class="input-date " type="date " value="" /> </div></div><div class="task-list-item-operates"><a href="javascript:void(0) " class="action action-remove not_a " ng-click="delete_sub_obj($index) "><span class="icon-close "></span></a> </div></div>');
+  }
 
 }]);
 
@@ -362,11 +362,31 @@ pms.controller('evaluatee', ['$http', '$scope', '$routeParams', '$location', fun
     $scope.show_team('#modal_add');
   }
 
+  // $scope.edit_idp = function(id, index) {
+  //   $(id).toggle();
+  //   $scope.editing_idp = $scope.idps[index];
+  //   $scope.editing_idp.eta = new Date($scope.editing_idp.eta);
+  //
+  //   if ($scope.editing_idp.progress == 0) {
+  //     $scope.editing_idp.status = 'Not started';
+  //   } else if ($scope.editing_idp.progress == 100) {
+  //     $scope.editing_idp.status = 'Completed';
+  //   } else {
+  //     $scope.editing_idp.status = 'In progress';
+  //   }
+  //
+  //   $scope.idps[index] = $scope.editing_idp;
+  // }
+
   $scope.edit_idp = function(id, index) {
     $(id).toggle();
+    $scope.idpId = index;
     $scope.editing_idp = $scope.idps[index];
     $scope.editing_idp.eta = new Date($scope.editing_idp.eta);
 
+  }
+
+  $scope.save_edit_idp = function(index) {
     if ($scope.editing_idp.progress == 0) {
       $scope.editing_idp.status = 'Not started';
     } else if ($scope.editing_idp.progress == 100) {
@@ -374,8 +394,10 @@ pms.controller('evaluatee', ['$http', '$scope', '$routeParams', '$location', fun
     } else {
       $scope.editing_idp.status = 'In progress';
     }
-
+    $scope.editing_idp.eta = ('0' + ($scope.editing_idp.eta.getMonth() + 1)).slice(-2) + '/' + ('0' + ($scope.editing_idp.eta.getDate() + 1)).slice(-2) + '/' + $scope.editing_idp.eta.getFullYear();
     $scope.idps[index] = $scope.editing_idp;
+
+    $scope.show_team('#modal_edit');
   }
 
   // Set active on selected navbar item
@@ -400,11 +422,11 @@ pms.controller('evaluatee', ['$http', '$scope', '$routeParams', '$location', fun
 
 }]);
 
-pms.controller('dashboard',['$http','$scope',function($http,$scope){
-  var ctx = document.getElementById('myChart').getContext('2d');
+pms.controller('dashboard', ['$http', '$scope', function($http, $scope) {
+  var ctx = document.getElementById('popChart').getContext('2d');
   Chart.scaleService.updateScaleDefaults('linear', {
     ticks: {
-      min: 0,
+      min: 40,
       max: 100,
       stepSize: 20
     }
@@ -415,13 +437,49 @@ pms.controller('dashboard',['$http','$scope',function($http,$scope){
 
     // The data for our dataset
     data: {
-      labels: ["S2-2015", "S1-2016", "S2-2016", "S1-2017", "S2-2017", "S1-2018"],
+      labels: ["2012", "2013", "2014", "2015", "2016", "2017"],
       datasets: [{
-        label: "",
-        backgroundColor: 'rgba(255,255,255,0)',
+        label: "SEA",
+        backgroundColor: 'rgba(0,0,0,0)',
         borderColor: '#4265ed',
-        data: [80, 65, 75, 70, 60, 85],
-      }]
+        data: [80, 65, 75, 69, 78, 75]}
+      // }, {
+      //   label: "MNL",
+      //   backgroundColor: 'rgba(0,0,0,0)',
+      //   borderColor: '#ffdbf3',
+      //   data: [75, 60, 75, 75, 60, 80],
+      // }, {
+      //   label: "JOG",
+      //   backgroundColor: 'rgba(0,0,0,0)',
+      //   borderColor: '#bde29d',
+      //   data: [80, 65, 75, 80, 90, 80],
+      // }, {
+      //   label: "JOG2",
+      //   backgroundColor: 'rgba(0,0,0,0)',
+      //   borderColor: '#7fb4b8',
+      //   data: [85, 60, 70, 82, 94, 97],
+      // }, {
+      //   label: "HAN",
+      //   backgroundColor: 'rgba(0,0,0,0)',
+      //   borderColor: '#aedeff',
+      //   data: [87, 75, 73, 80, 84, 97],
+      // }, {
+      //   label: "DAD",
+      //   backgroundColor: 'rgba(0,0,0,0)',
+      //   borderColor: '#e2b8ff',
+      //   data: [65, 60, 73, 89, 90, 74],
+      // }, {
+      //   label: "SA1",
+      //   backgroundColor: 'rgba(0,0,0,0)',
+      //   borderColor: '#ffd38b',
+      //   data: [58, 65, 75, 80, 91, 90],
+      // }, {
+      //   label: "SA2",
+      //   backgroundColor: 'rgba(0,0,0,0)',
+      //   borderColor: '#ff9cd9',
+      //   data: [50, 67, 76, 78, 70, 90],
+      // }
+    ]
     },
 
     // Configuration options go here
@@ -429,6 +487,65 @@ pms.controller('dashboard',['$http','$scope',function($http,$scope){
       legend: {
         display: false
       }
+    }
+  });
+
+
+  var ctx = document.getElementById('barChart').getContext('2d');
+
+  var myBarChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+      datasets: [{
+        label: "SEA",
+        backgroundColor: '#4265ed',
+        borderColor: '#4265ed',
+        data: [80],
+      }, {
+        label: "MNL",
+        backgroundColor: '#ffdbf3',
+        borderColor: '#ffdbf3',
+        data: [75],
+      }, {
+        label: "JOG",
+        backgroundColor: '#bde29d',
+        borderColor: '#bde29d',
+        data: [80],
+      }, {
+        label: "JOG2",
+        backgroundColor: '#7fb4b8',
+        borderColor: '#7fb4b8',
+        data: [85],
+      }, {
+        label: "HAN",
+        backgroundColor: '#aedeff',
+        borderColor: '#aedeff',
+        data: [87],
+      }, {
+        label: "DAD",
+        backgroundColor: '#e2b8ff',
+        borderColor: 'rgba(0,0,0,0)',
+        data: [65],
+      }, {
+        label: "SA1",
+        backgroundColor: '#ffd38b',
+        borderColor: '#ffd38b',
+        data: [58],
+      }, {
+        label: "SA2",
+        backgroundColor: '#ff9cd9',
+        borderColor: '#ff9cd9',
+        data: [50],
+      }
+      ]
+    },
+
+    // Configuration options go here
+    options: {
+      legend: {
+        display: false
+      },
+      barThickness: '2px'
     }
   });
 
@@ -473,6 +590,11 @@ pms.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     .when("/evaluator/dashboard", {
       templateUrl: "partials/evaluator/evo_dashboard.html",
       controller: 'dashboard',
+      title: 'Evaluatee'
+    })
+    .when("/evaluator/info/:itemId", {
+      templateUrl: "partials/evaluator/evo_info.html",
+      controller: 'evaluatee',
       title: 'Evaluatee'
     })
     .when("/evaluatee/:itemId", {
