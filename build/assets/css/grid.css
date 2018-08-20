@@ -245,8 +245,8 @@ td{
 }
 
 .idp_table{
-  margin-left: 6rem;
-  margin-right: 32px;
+  /* margin-left: 2rem; */
+  /* margin-right: 32px; */
   margin-top: 32px;
   width: 100%;
   border: solid 1px var(--pale-grey);
@@ -263,6 +263,7 @@ td{
   padding-left: 8px;
   padding-top: 12px;
   padding-bottom: 12px;
+  padding-right: 0px;
 }
 
 .idp_table>tbody>tr:hover{
@@ -458,7 +459,7 @@ tr.table_row_border>td>a{
 .team_filter{
   height: 80px;
   background-color: var(--really-light-blue);
-  padding-left: 6rem;
+  padding-left: 2rem;
   padding-top: 25px;
 }
 
