@@ -103,7 +103,7 @@ pms.controller('mainCtrl', ['$http', '$scope', '$routeParams', '$location', '$fi
     $scope.achievement = 0;
 
     // calculate achieve for each sub-obj
-    $scope.sub_objs.forEach(function(item) {
+    $scope.sub_objs.forEach(function(item,index) {
       item.achievement = (((item.rate1 + item.rate2) / 2) * item.weight / 100).toFixed(0);
       $scope.total_score = $scope.total_score + parseInt(item.achievement);
 
@@ -144,6 +144,7 @@ pms.controller('mainCtrl', ['$http', '$scope', '$routeParams', '$location', '$fi
 
   // Show team bar
   $scope.show_team = function(id) {
+    console.log(id);
     $(id).toggle();
   }
 
@@ -328,9 +329,20 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams', '$location', '$f
     $scope.sub_objs.push(index);
   }
 
-  $scope.new_blank_sub_obj = function() {
-    $('#blank_task_list').append('<div class="task-list-item d-flex align-items-center"><div class="task-list-item-inputs bg-pale-grey"><div class="form-group "><label for="sub1">Sub-objective</label> <textarea class="form-control" id="sub1 " rows="5"></textarea> </div><div class="form-group"> <label for="weight">Weight (%)</label> <input type="number" id="weight" class="form-control number-only"> </div><div class="form-group active "> <label for="eta ">ETA</label><input class="input-date " type="date " value="" /> </div></div><div class="task-list-item-operates"><a href="javascript:void(0) " class="action action-remove not_a " ng-click="delete_sub_obj($index) "><span class="icon-close "></span></a> </div></div>');
+  $scope.new_blank_sub_obj = function(id) {
+    console.log(id);
+    $(id).append('<div class="widget-content" style="margin-left:30px;"><div class="widget-content-item display-table"><div class="display-table-cell"><div class="widget-content-item-content"><textarea class="text-input full-width" style="border:0" rows="2" placeholder="Type new objetive"></textarea></div></div><div class="display-table-cell"><div class="widget-content-item-content text-center" style="position:relative;top:-30px">11/30/2018<span class="icon-event compose-icon"></span> </div></div><div class="display-table-cell"><div class="widget-content-item-content" style="position:relative;top:-30px"><input class="input" type="number" name="" ng-model="sub_obj.weight"></div></div><div class="display-table-cell"><div class="widget-content-item-content text-center" style="position:relative;top:-30px"><span class="icon-pencil compose-icon-right" ng-click="clone_sub_objs($event,' +'&#39#presets-modal&#39' +')"> <p>Presets</p> </span><span class="icon-docs compose-icon-right"> <p>Clone</p> </span><span class="icon-trash compose-icon-right"> <p>Delete</p> </span></div></div></div></div>');
   }
+
+  $scope.clone_sub_objs = function(event,id){
+    var x = event.clientX;
+    var y = event.clientY;
+    $scope.show_team(id);
+    $(id).css('top',y);
+    $(id).css('left',x);
+  }
+
+
 
 }]);
 
@@ -423,7 +435,7 @@ pms.controller('evaluatee', ['$http', '$scope', '$routeParams', '$location', fun
 }]);
 
 pms.controller('dashboard', ['$http', '$scope', function($http, $scope) {
-  
+
 
 }]);
 

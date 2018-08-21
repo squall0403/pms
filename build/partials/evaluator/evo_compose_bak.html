@@ -13,6 +13,7 @@
           <div class="col-md-6">
             <div class="page-body">
               <div class="objectives">
+                <!--  -->
                 <!-- <div class="widget" ng-repeat="obj in objs | filter: 'Senior'" id="obj{{$index}}">
                   <div class="d-flex justify-content-between">
                     <div class="widget-title">Objective {{$index + 1}}</div>
@@ -36,42 +37,35 @@
                     </div>
                   </div>
                 </div> -->
-                <!-- <div class="widget" ng-repeat="obj in objs | filter: 'Senior'" id="obj{{$index}}">
-                  <div class="d-flex justify-content-between">
-                    <div class="widget-title">Objective {{$index + 1}}</div>
-                    <div class="widget-btn-delete" ng-click="delete_obj($index)">Delete</div>
+                <!--  -->
+                <div class="widget">
+                  <div class="d-flex justify-content-between border-bottom">
+                    <div class="widget-title2">Objective</div>
+                    <div class="btn btn-primary">+ Add</div>
                   </div>
-                  <div class="widget-big-title">{{obj.objective}}</div> -->
-                <div class="widget-content">
-                  <div class="widget-content-item display-table">
-                    <div class="display-table-cell">
-                      <div class="widget-content-item-title">Sub-objective</div>
-                    </div>
-                    <div class="display-table-cell">
-                      <div class="widget-content-item-title" style="text-align:center">ETA</div>
-                    </div>
-                    <div class="display-table-cell">
-                      <div class="widget-content-item-title" style="text-align:center">Weight</div>
-                    </div>
+                  <div class="row border-bottom" style="margin-left:0.1rem">
+                    <div class="col-8"> Details </div>
+                    <div class="col-2 text-center"> ETA </div>
+                    <div class="col-2 text-center"> Weight </div>
                   </div>
-                  <div ng-repeat="sub_obj in sub_objs" id="sub_obj{{$index}}">
-                    <div class="widget-content-item display-table" ng-click="set_active('#sub_obj' + $index)">
+                  <div class="row obj-group">
+                    <p>Quality/Satistfaction</p>
+                  </div>
+                  <div class="widget-content" ng-repeat="sub_obj in sub_objs | filter : obj.objective | filter : 'Senior'">
+                    <div class="widget-content-item display-table" ng-click="set_active('#obj' + $parent.$index)">
                       <div class="display-table-cell">
-                        <!-- <div class="widget-content-item-title">Sub-objective {{$index + 1}}</div> -->
                         <div class="widget-content-item-content"> {{sub_obj.sub_objectives}} </div>
                       </div>
                       <div class="display-table-cell">
-                        <!-- <div class="widget-content-item-title">ETA</div> -->
-                        <div class="widget-content-item-content" style="text-align:center"> {{sub_obj.eta}} </div>
+                        <div class="widget-content-item-content"> {{sub_obj.eta}} </div>
                       </div>
                       <div class="display-table-cell">
-                        <!-- <div class="widget-content-item-title">Weight</div> -->
-                        <div class="widget-content-item-content" style="text-align:center"> {{sub_obj.weight}}% </div>
+                        <div class="widget-content-item-content"> {{sub_obj.weight}}% </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <!-- </div> -->
+                <!--  -->
               </div>
             </div>
           </div>
@@ -82,27 +76,50 @@
                   <!-- <h3>Composing</h3> -->
                   <!-- <span class="sub-title">Composing is unavailable while asking for agreement</span> --></div>
                 <div class="composing-body">
-                  <div class="filter-group active"> <select class="custom-select" ng-model="refobj" ng-options="obj.objective for obj in objs"></select><select class="custom-select" ng-options="ref_sub_obj.sub_objectives for ref_sub_obj in ref_sub_objs | filter : refobj.objective" ng-model="selected_ref_obj"
-                      ng-change="add_sub_obj_from_ref(selected_ref_obj)">
-                    </select> </div>
+                  <div class="filter-group active"> <select class="custom-select" name="presets" id="Presets">
+                    <option value="2" selected>Programmer Senior</option>
+                    <option value="1">Programmer Junior2</option>
+                </select>
+                    <!-- <select class="custom-select" name="objectives" id="Objectives">
+                    <option value="$index" ng-repeat="ref_obj in ref_objs" ng-selected="add_obj_from_ref($index)">{{ref_obj.objective}}</option>
+                </select>  --><select class="custom-select" ng-options="ref_obj.objective for ref_obj in ref_objs" ng-model="selected_ref_obj" ng-change="add_obj_from_ref(selected_ref_obj)" ng-value="ref_obj.objective">
+                <option value="">Add blank</option>
+                </select> </div>
                   <!-- Editing obj -->
-                  <div class="editting">
-                    <!-- <div class="form-group"> <label for="objective1">Objective</label> <input type="text" class="form-control" id="objective1" placeholder="{{objs[active_obj].objective}} "> </div> -->
-                    <div class="task-list ">
+                  <div class="editting" id="edit_from_ref">
+                    <div class="form-group"> <label for="objective1">Objective</label> <input type="text" class="form-control" id="objective1" placeholder="{{objs[active_obj].objective}}"> </div>
+                    <div class="task-list " ng-repeat="sub_obj in sub_objs | filter : objs[active_obj].objective | filter : 'Senior'">
                       <div class="task-list-item d-flex align-items-center ">
                         <div class="task-list-item-inputs bg-pale-grey ">
-                          <div class="form-group "> <label for="sub1 ">Sub-objective</label> <textarea class="form-control " id="sub1 " rows="5" ng-model="sub_objs[active_obj].sub_objectives"></textarea> </div>
-                          <div class="form-group "> <label for="weight ">Weight (%)</label> <input type="number " id="weight " class="form-control number-only " ng-model="sub_objs[active_obj].weight"> </div>
+                          <div class="form-group "> <label for="sub1 ">Sub-objective</label> <textarea class="form-control " id="sub1 " rows="5 ">{{sub_obj.sub_objectives}}</textarea> </div>
+                          <div class="form-group "> <label for="weight ">Weight (%)</label> <input type="number " id="weight " class="form-control number-only " ng-value="{{sub_obj.weight}}"> </div>
                           <div class="form-group active "> <label for="eta ">ETA</label>
                             <!-- <select id="eta " class="form-control "> -->
                             <!-- <option value="02/08/2018 ">{{edit_sub_obj.eta}}</option> -->
-                            <!-- </select> --><input class="input-date " type="text" ng-model="sub_objs[active_obj].eta" /> </div>
+                            <!-- </select> --><input class="input-date " type="date " value="{{sub_obj.eta}}" /> </div>
                         </div>
                         <div class=" task-list-item-operates "> <a href="javascript:void(0) " class="action action-remove not_a " ng-click="delete_sub_obj($index) "><span class="icon-close "></span></a> </div>
                       </div>
                     </div>
                   </div>
                   <!-- Editing obj -->
+                  <!-- edit blank -->
+                  <div class="editting" id="edit_blank" style="display:none">
+                    <div class="form-group"> <label for="objective1">Objective</label> <input type="text" class="form-control" id="objective1" placeholder=""> </div>
+                    <div class="task-list" id="blank_task_list">
+                      <div class="task-list-item d-flex align-items-center">
+                        <div class="task-list-item-inputs bg-pale-greys">
+                          <div class="form-group "> <label for="sub1 ">Sub-objective</label> <textarea class="form-control" id="sub1" rows="5"></textarea> </div>
+                          <div class="form-group"> <label for="weight">Weight (%)</label> <input type="number" id="weight" class="form-control number-only"> </div>
+                          <div class="form-group active"> <label for="eta ">ETA</label>
+                            <!-- <select id="eta " class="form-control "> -->
+                            <!-- <option value="02/08/2018 ">{{edit_sub_obj.eta}}</option> -->
+                            <!-- </select> --><input class="input-date " type="date " value="" /> </div>
+                        </div>
+                        <div class=" task-list-item-operates "> <a href="javascript:void(0) " class="action action-remove not_a " ng-click="delete_sub_obj($index) "><span class="icon-close "></span></a> </div>
+                      </div>
+                    </div><button class="btn btn-primary" type="button" name="button" style="margin-bottom:2rem" ng-click="new_blank_sub_obj()">Add sub-objective</button> </div>
+                  <!-- edit blank -->
                 </div>
               </div>
             </div>
