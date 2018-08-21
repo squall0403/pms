@@ -15,7 +15,9 @@
             </div>
             <div class="row">
               <div class="col font-italic"> <a href="#/evaluator/compose/{{eveId}}">
-                            <b>{{selected_period}}</b></a> </div>
+                <b ng-if="selected_period != 'Custom'">{{selected_period}}</b>
+                <b ng-if="selected_period == 'Custom'">{{custom_period}}</b>
+              </a> </div>
             </div>
           </div>
         </div>
@@ -99,7 +101,7 @@
                                       <option value="Y-2018">Year 2018</option>
                                       <option value="Custom">Custom</option>
                                   </select> </div>
-                  <div class="second-item" style="margin-top:15px" ng-show="selected_period == 'Custom'"> <span>Period name</span> <input class="input-date" type="text" /> </div>
+                  <div class="second-item" style="margin-top:15px" ng-show="selected_period == 'Custom'"> <span>Period name</span> <input class="input-date" type="text" ng-model="custom_period"/> </div>
                   <div class="second-item" style="margin-top:15px"> <span>STARt DAte</span> <input class="input-date" type="text" value="{{start_date}}" ng-disabled="selected_period != 'Custom'" /> </div>
                   <div class="second-item" style="margin-top:15px"> <span>end DAte</span> <input class="input-date" type="text" value="{{end_date}}" ng-disabled="selected_period != 'Custom'" /> </div>
                 </div>
@@ -111,7 +113,8 @@
                 <div class="item-right-content">
                   <div class="display-table">
                     <div class="display-table-cell"> Period </div>
-                    <div class="text-content display-table-cell"> {{selected_period}} </div>
+                    <div class="text-content display-table-cell" ng-if="selected_period != 'Custom'"> {{selected_period}} </div>
+                    <div class="text-content display-table-cell" ng-if="selected_period == 'Custom'"> {{custom_period}} </div>
                   </div>
                   <div class="display-table">
                     <div class="display-table-cell"> Start-end </div>
