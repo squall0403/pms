@@ -19,20 +19,20 @@
           <div class="col-md-12">
             <div class="page-body">
               <div class="objectives">
-                <div style="display:table" class="full-width">
-                  <div class="display-table-cell">
+                <div class="full-width row">
+                  <div class="col-4">
                     <div class="widget-content-item-title">Objecitve (3)</div>
                   </div>
-                  <div class="display-table-cell">
+                  <div class="col-2">
                     <div class="widget-content-item-title text-center">ETA</div>
                   </div>
-                  <div class="display-table-cell">
+                  <div class="col-1">
                     <div class="widget-content-item-title">Weight</div>
                   </div>
-                  <div class="display-table-cell">
+                  <div class="col-3">
                     <div class="widget-content-item-title">Comment</div>
                   </div>
-                  <div class="display-table-cell">
+                  <div class="col-2">
                     <div class="widget-content-item-title">Rate(%)</div>
                   </div>
                 </div>
@@ -40,26 +40,27 @@
                   <div class="widget-big-title" style="font-weight:600">
                     <span class="icon-arrow-down compose-icon" style="font-size:12px; margin-right:10px" ng-click="show_team('#sub_objs' + $index)"></span>{{obj.objective}}</div>
                   <div class="widget-content" id="sub_objs{{$index}}">
-                    <div class="widget-content-item display-table" ng-repeat="sub_obj in sub_objs |filter: 'Senior' |filter: obj.objective" ng-click="set_active('#sub_obj' + $parent.$index + $index)" ng-class="{active:$index == selected_sub}">
-                      <div class="display-table-cell">
+                    <div class="widget-content-item row" ng-repeat="sub_obj in sub_objs |filter: 'Senior' |filter: obj.objective" ng-click="set_active('#sub_obj' + $parent.$index + $index)" ng-class="{active:$index == selected_sub}">
+                      <div class="col-4">
                         <div class="widget-content-item-content">
                           <textarea class="text-input full-width" style="border:0" rows="2">{{sub_obj.sub_objectives}}</textarea>
                         </div>
                       </div>
-                      <div class="display-table-cell">
-                        <div class="widget-content-item-content text-center" style="position:relative;top:-27px">{{sub_obj.eta}}
+                      <div class="col-2">
+                        <div class="widget-content-item-content text-center" style="">{{sub_obj.eta}}
                         </div>
                       </div>
-                      <div class="display-table-cell">
-                        <div class="widget-content-item-content" style="position:relative;top:-27px">{{sub_obj.weight}}%</div>
+                      <div class="col-1">
+                        <div class="widget-content-item-content" style="">
+                          {{sub_obj.weight}}%</div>
                       </div>
-                      <div class="display-table-cell">
+                      <div class="col-3">
                         <div class="widget-content-item-content">
-                          <textarea class="text-input full-width" style="border: 1px solid #e4e7eb" rows="2">{{sub_obj.comment}}</textarea>
+                          <textarea class="text-input full-width" style="border: 1px solid #e4e7eb" rows="3">{{sub_obj.comment}}</textarea>
                         </div>
                       </div>
-                      <div class="display-table-cell">
-                        <div class="widget-content-item-content text-center slidecontainer" id="comment{{$parent.$index}}{{$index}}" style="position:relative;top:-27px">
+                      <div class="col-2">
+                        <div class="widget-content-item-content text-center slidecontainer" id="comment{{$parent.$index}}{{$index}}" style="">
                           <input type="number" name="" ng-model="sub_obj.rate1" style="width:45%;display:inline-block;text-align:center" class="no-number">
                           <input type="range" ng-model="sub_obj.rate1" class="slider" style="width:50%;display:inline-block" min="0" max="100" step="1">
                         </div>

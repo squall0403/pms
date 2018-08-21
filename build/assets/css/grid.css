@@ -822,3 +822,10 @@ textarea::-webkit-scrollbar-thumb {
     appearance: none;
     margin: 0;
 }
+
+.weight-icon{
+  position: relative;
+  top: 0px;
+  left: 35px;
+  
+}
