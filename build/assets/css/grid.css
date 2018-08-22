@@ -56,7 +56,7 @@ a{
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 500;
-  font-family: 'Fira Sans';
+  font-family: 'Nunito';
   cursor: pointer;
   padding: 0px 2rem !important;
   /* display: inline-block !important; */
@@ -183,7 +183,7 @@ a{
   display: inline-block;
   color: white;
   font-weight: 200;
-  font-family: 'Fira Sans';
+  font-family: 'Nunito';
   margin-top: 0.9rem;
   margin-left: 2rem;
 }
@@ -194,7 +194,7 @@ a{
   color: white;
   font-weight: 200;
   text-transform: uppercase;
-  font-family: 'Fira Sans';
+  font-family: 'Nunito';
   padding-left: 1rem;
 }
 /* header_bar */
@@ -340,13 +340,13 @@ tr.table_row_border>td>a{
     width: 37%; /* Could be more or less, depending on screen size */
     box-shadow: 0 6px 13px 0 rgba(0, 0, 0, 0.09);
     border-radius: 3px;
-    font-family: 'Fira Sans';
+    font-family: 'Nunito';
 }
 
 .modal-header{
   font-size: 16px;
   color: var(--greyish-brown);
-  font-family: 'Fira Sans';
+  font-family: 'Nunito';
   padding: 32px 32px 24px 32px;
   border: 0 !important;
 }
@@ -369,7 +369,7 @@ tr.table_row_border>td>a{
   width: 85%;
   font-size: 16px;
   letter-spacing: 0.1px;
-  font-family: 'Fira Sans';
+  font-family: 'Nunito';
   border: 0px;
   border-bottom: solid 1px var(--warm-grey);
 }
@@ -444,7 +444,7 @@ tr.table_row_border>td>a{
 
 .all_team>a{
   font-size: 14px;
-  font-family: 'Fira Sans';
+  font-family: 'Nunito';
 }
 
 .team_bar>ul{
@@ -515,7 +515,7 @@ tr.table_row_border>td>a{
 }
 
 .team_performance>h1{
-  font-family: 'Fira Sans';
+  font-family: 'Nunito';
   font-size: 24px;
   font-weight: normal;
   color: var(--greyish-brown);
