@@ -749,7 +749,7 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .case-3 .objectives .widget-content-item .display-table-cell:first-child{
-  width: 35% !important;
+  width: 30% !important;
 }
 
 .objectives .display-table-cell:nth-child(2){
@@ -758,7 +758,7 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .case-3 .objectives .widget-content-item .display-table-cell:nth-child(2){
-  width: 20% !important;
+  width: 15% !important;
 }
 
 .objectives .display-table-cell:nth-child(3){
@@ -792,7 +792,7 @@ textarea::-webkit-scrollbar-thumb {
     width: 100%;
 }
 
-.slider {
+input[type=range] {
     -webkit-appearance: none;
     width: 100%;
     height: 5px;
@@ -803,11 +803,11 @@ textarea::-webkit-scrollbar-thumb {
     transition: opacity .2s;
 }
 
-.slider:hover {
+input[type=range]:hover {
     opacity: 1;
 }
 
-.slider::-webkit-slider-thumb {
+input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 10px;
@@ -817,11 +817,26 @@ textarea::-webkit-scrollbar-thumb {
     cursor: pointer;
 }
 
-.slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    background: #4CAF50;
-    cursor: pointer;
+input[type=range]::-moz-range-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  border: 0px;
+}
+
+
+input[type=range]::-ms-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
 }
 
 .no-number::-webkit-inner-spin-button,
@@ -853,4 +868,29 @@ input[type="date"]::-webkit-inner-spin-button,input[type="date"]::-webkit-clear-
   -moz-appearance: none;
   appearance: none;
   margin: 0;
+}
+
+.opacity_100{
+  opacity: 1 !important;
+}
+
+.case-3 .objectives{
+  padding-right: 5px;
+}
+
+/* Progress */
+
+.case-6 .page-content .body-content .result-info .item-result .first-item.fix{
+  margin-right: 1.5rem;
+}
+.progress-bar{
+  background: var(--azul);
+}
+
+.progress{
+  background: #bbbbbb;
+}
+
+.case-8 .page-content .body-content .table-period table tr th, .case-8 .page-content .body-content .table-period table tr td{
+  opacity: 1;
 }

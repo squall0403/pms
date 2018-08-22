@@ -85,28 +85,28 @@
       </div>
       <div class="evaluation-detail">
         <div class="title">Evaluation details</div>
-        <!-- <div class="widget widget-case-6" ng-repeat="obj in objs | filter : 'Senior'"> -->
-        <!-- <div class="d-flex justify-content-between">
-            <div class="widget-title">Objective {{$index + 1}}</div>
-          </div>
-          <div class="widget-big-title">{{obj.objective}}</div> -->
-        <div class="widget-content">
-          <div class="widget-content-item display-table" ng-repeat="sub_obj in sub_objs">
-            <div class="display-table-cell">
-              <div class="widget-content-item-title">Sub-objective {{$index + 1}}</div>
-              <div class="widget-content-item-content"> {{sub_obj.sub_objectives}}</div>
-            </div>
-            <div class="display-table-cell">
-              <div class="widget-content-item-title">ETA</div>
-              <div class="widget-content-item-content">{{sub_obj.eta}} </div>
-            </div>
-            <div class="display-table-cell">
-              <div class="widget-content-item-title">Weight</div>
-              <div class="widget-content-item-content">
-                <div class="percent-box bg-light-cyan"> {{sub_obj.weight}}% </div>
+        <div class="widget widget-case-6" ng-repeat="obj in objs | filter : 'Senior'">
+<div class="d-flex justify-content-between">
+  <div class="widget-title">Objective {{$index + 1}}</div>
+</div>
+<div class="widget-big-title">{{obj.objective}}</div>
+          <div class="widget-content">
+            <div class="widget-content-item display-table" ng-repeat="sub_obj in sub_objs | filter : obj.objective | filter : 'Senior'">
+              <div class="display-table-cell">
+                <div class="widget-content-item-title">Sub-objective {{$index + 1}}</div>
+                <div class="widget-content-item-content"> {{sub_obj.sub_objectives}}</div>
               </div>
-            </div>
-            <!-- <div class="display-table-cell">
+              <div class="display-table-cell">
+                <div class="widget-content-item-title">ETA</div>
+                <div class="widget-content-item-content">{{sub_obj.eta}} </div>
+              </div>
+              <div class="display-table-cell">
+                <div class="widget-content-item-title">Weight</div>
+                <div class="widget-content-item-content">
+                  <div class="percent-box bg-light-cyan"> {{sub_obj.weight}}% </div>
+                </div>
+              </div>
+<!-- <div class="display-table-cell">
                 <div class="widget-content-item-title">Ratings</div>
                 <div class="widget-content-item-content d-flex">
                   <div class="percent-box bg-ragular-grey">{{sub_obj.self_rate}}%</div>
@@ -114,30 +114,30 @@
                   <div class="percent-box bg-medium-cyan">{{sub_obj.rate2}}%</div>
                 </div>
               </div> -->
-            <div class="display-table-cell">
-              <div class="widget-content-item-title">Evaluatee</div>
-              <div class="percent-box bg-ragular-grey" style="margin-bottom: 1rem">{{sub_obj.self_rate}}%</div>
-              <div class="widget-content-item-content small-content">{{sub_obj.comment}}</div>
-            </div>
-            <div class="display-table-cell">
-              <div class="widget-content-item-title">Evaluator 1</div>
-              <div class="percent-box bg-medium-cyan" style="margin-bottom: 1rem">{{sub_obj.rate1}}%</div>
-              <div class="widget-content-item-content small-content">{{sub_obj.comment2}}</div>
-            </div>
-            <div class="display-table-cell">
-              <div class="widget-content-item-title">Evaluator 2</div>
-              <div class="percent-box bg-medium-cyan" style="margin-bottom: 1rem">{{sub_obj.rate2}}%</div>
-              <div class="widget-content-item-content small-content">{{sub_obj.comment2}}</div>
-            </div>
-            <div class="display-table-cell">
-              <div class="widget-content-item-title">Score</div>
-              <div class="widget-content-item-content">
-                <div class="percent-box-square bg-dark-cyan"> {{sub_obj.achievement}}%</div>
+              <div class="display-table-cell">
+                <div class="widget-content-item-title">Evaluatee</div>
+                <div class="percent-box bg-ragular-grey" style="margin-bottom: 1rem">{{sub_obj.self_rate}}%</div>
+                <div class="widget-content-item-content small-content">{{sub_obj.comment}}</div>
+              </div>
+              <div class="display-table-cell">
+                <div class="widget-content-item-title">Evaluator 1</div>
+                <div class="percent-box bg-medium-cyan" style="margin-bottom: 1rem">{{sub_obj.rate1}}%</div>
+                <div class="widget-content-item-content small-content">{{sub_obj.comment2}}</div>
+              </div>
+              <div class="display-table-cell">
+                <div class="widget-content-item-title">Evaluator 2</div>
+                <div class="percent-box bg-medium-cyan" style="margin-bottom: 1rem">{{sub_obj.rate2}}%</div>
+                <div class="widget-content-item-content small-content">{{sub_obj.comment2}}</div>
+              </div>
+              <div class="display-table-cell">
+                <div class="widget-content-item-title">Score</div>
+                <div class="widget-content-item-content">
+                  <div class="percent-box-square bg-dark-cyan"> {{sub_obj.achievement}}%</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- </div> -->
       </div>
       <div class="general-comment">
         <div class="title">General comments</div>

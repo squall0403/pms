@@ -1,19 +1,29 @@
-<div class="evor_side_bar"> <a href="#/"><img ng-src="assets/images/img-logo.png" alt=""></a>
+<div class="evor_side_bar">
+  <a href="#/"><img ng-src="assets/images/img-logo.png" alt=""></a>
   <a href="#/evaluator/dashboard" class="not_a">
-    <div class="side_bar_icon icon-chart"> </div>
+    <div class="side_bar_icon icon-chart"></div>
   </a>
-  <div class="side_bar_icon icon-people" ng-click="show_team('#team_bar')"> </div>
-  <div class="side_bar_icon icon-game-controller"> </div>
+  <div class="side_bar_icon icon-people" ng-click="show_team('#team_bar')"></div>
+  <!-- <div class="side_bar_icon icon-game-controller"> </div> -->
 </div>
 <!-- Sidebar -->
 <div class="team_bar" id="team_bar">
   <div class="team_bar_header">
-    <div class="icon-people"> </div>
-    <div class="team_bar_text"> team management </div>
+    <div class="icon-people"></div>
+    <div class="team_bar_text">
+      team management
+    </div>
   </div>
-  <div class="all_team"><a href="#/evaluator">All members({{num_of_users}})</a> </div>
+  <div class="all_team">
+    <a href="#/evaluator">All members({{num_of_users}})</a>
+  </div>
   <ul ng-repeat="user in users">
-    <li><a href="#/evaluator/{{user.status == 'Not started' ? 'create' : user.status == 'Composing' ? 'compose' : user.status == 'Evaluating' ? 'detail' : 'review'}}/{{$index}}"><img ng-src="{{user.avatar}}" alt="">{{user.full_name}}</a> <i> <span style="color:var(--warm-grey)">- {{user.status}}</span></i></li>
+    <li>
+      <a href="#/evaluator/{{user.status == 'Not started' ? 'create' : user.status == 'Composing' ? 'compose' : user.status == 'Evaluating' ? 'detail' : 'review'}}/{{$index}}"><img ng-src="{{user.avatar}}" alt="">{{user.full_name}}</a>
+      <i>
+        <span style="color:var(--warm-grey)">-
+          {{user.status}}</span></i>
+    </li>
   </ul>
 </div>
 <!-- Sidebar -->

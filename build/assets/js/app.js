@@ -1,5 +1,5 @@
-// var url = '../assets/data/';
-var url = '../build/assets/data/';
+var url = '../assets/data/';
+// var url = '../build/assets/data/';
 // var url = '../pms/assets/data/';
 
 var overall = 0;
@@ -120,8 +120,10 @@ pms.controller('mainCtrl', ['$http', '$scope', '$routeParams', '$location', '$fi
 
 		// calculate achieve for each sub-obj
 		$scope.sub_objs.forEach(function(item, index) {
-			item.achievement = (((item.rate1 + item.rate2) / 2) * item.weight / 100).toFixed(0);
-			$scope.total_score = $scope.total_score + parseInt(item.achievement);
+			item.achievement = (((item.rate1 + item.rate2) / 2)).toFixed(0);
+      var temp_total_score = item.achievement;
+      temp_total_score = temp_total_score * item.weight / 100;
+			$scope.total_score = $scope.total_score + parseInt(temp_total_score);
 
 		});
 
@@ -545,6 +547,11 @@ pms.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 			controller: 'evaluatee',
 			title: 'Evaluatee'
 		})
+    .when("/evaluator/conclude/:itemId", {
+      templateUrl: "partials/evaluator/evo_conclude.html",
+      controller: 'evaluatee',
+      title: 'Evaluatee'
+    })
 		.when("/evaluatee/:itemId", {
 			templateUrl: "partials/evaluatee/index.html",
 			controller: 'evaluatee',

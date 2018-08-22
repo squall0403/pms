@@ -5,8 +5,27 @@
   <div class="page-content">
     <div class="period-header">
       <h5 class="main-title">{{current_period}}</h5>
-
-      <a href="#" class="sub-title color-bright-blue">Information</a>
+      <span class="sub-title color-bright-blue" ng-click="show_team('#ee_info')" style="cursor:pointer">Information</span>
+      <div class="row" id="ee_info" style="display:none">
+        <div class="col-2">
+          <ul style="color:grey;list-style-type:none">
+            <li>Department</li>
+            <li>Devision</li>
+            <li>Team</li>
+            <li>Position</li>
+            <li>Job level</li>
+          </ul>
+        </div>
+        <div class="col-3">
+          <ul style="list-style-type:none">
+            <li>{{users[eveId].department}}</li>
+            <li>{{users[eveId].department}}</li>
+            <li>{{users[eveId].team}}</li>
+            <li>{{users[eveId].job_title}}</li>
+            <li>{{users[eveId].position}}</li>
+          </ul>
+        </div>
+      </div>
       <div class="period-status">
         <span>Status:</span>
         <span>Composing</span>
@@ -21,18 +40,20 @@
               <div class="objectives">
                 <div class="widget-title" style="font-size:20px;padding-bottom:22px;">Objective list
                   <span class="icon-docs compose-icon" ng-click="clone_sub_objs($event,'#clone-modal')"></span>
-                  <a class="btn btn-primary not_a " style="float:right" href="#/evaluator/detail/{{eveId}}" ng-show="total_weight == 100">FINISH composing</a>
-                  <button class="btn btn_ask out_line not_a " style="float:right; margin-right:1rem;font-size:13.5px">save</button>
+                  <a class="btn btn-primary not_a " style="float:right" href="#/evaluator/detail/{{eveId}}" ng-show="total_weight == 100">visible to Evaluatee</a>
+                  <button class="btn btn_ask out_line not_a " style="float:right; margin-right:1rem;font-size:13.5px">save edit</button>
                 </div>
                 <div class="widget-content-item display-table bg-light-blue" style="margin-bottom:10px;">
                   <div class="display-table-cell">
-                    <div class="widget-content-item-title compose-header">Objective (3)</div>
+                    <div class="widget-content-item-title compose-header">Objective ({{objs.length}})</div>
                   </div>
                   <div class="display-table-cell">
                     <div class="widget-content-item-title compose-header text-center">ETA</div>
                   </div>
                   <div class="display-table-cell">
-                    <div class="widget-content-item-title compose-header text-center">Weight <span ng-show="total_weight > 0">({{total_weight}})</span> </div>
+                    <div class="widget-content-item-title compose-header text-center">Weight
+                      <span ng-show="total_weight > 0">({{total_weight}})</span>
+                    </div>
                   </div>
                   <div class="display-table-cell">
                     <div class="widget-content-item-title compose-header text-center">Action</div>
@@ -66,7 +87,7 @@
                         </div>
                         <div class="display-table-cell">
                           <div class="widget-content-item-content text-center" style="position:relative;top:-30px">
-                            <span class="icon-magic-wand compose-icon-right" ng-click="clone_sub_objs($event,'#presets-modal','#sub_objs' + $parent.$index + $index)">
+                            <span class="icon-layers compose-icon-right" ng-click="clone_sub_objs($event,'#presets-modal','#sub_objs' + $parent.$index + $index)">
                               <p>Presets</p>
                             </span>
                             <span class="icon-docs compose-icon-right" ng-click="clone_sub_objs($event,'#clone-modal')">
@@ -80,7 +101,6 @@
                       </div>
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -104,19 +124,17 @@
         </div>
       </div>
     </div>
-
     <div class="footer-toast bg-grey on" ng-if="total_weight != 100">
       <div class="row ">
         <div class="col-sm-8 d-flex align-items-center ">
           <div class="footer-toast-content color-warm-grey ">
-            <span style="color: var(--danger);font-size:16px">Your total weight is over 100%, please balance weith on each objective</span>
+            <span style="color: var(--danger);font-size:16px">Your total weight is not 100%, please review weigth on each objective</span>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- <div class="footer-toast bg-white on "> <div class="row "> <div class="col-sm-8 d-flex align-items-center "> <div class="footer-toast-content "> <span>Click “Save” to save your composing. If you wish to finish composing, click
-    “Finish” button.</span> </div> </div> <div class="col-sm-4 d-flex align-items-center text-align-right btn-inline-group "> <a class="btn btn-ask not_a " style="color:var(--azul) " href="#/evaluator/detail/{{eveId}} ">FINISH</a><a class="btn btn-submit
-    not_a " style="color:white ">Save</a> </div> </div> </div> -->
+    <!-- <div class="footer-toast bg-white on "> <div class="row "> <div class="col-sm-8 d-flex align-items-center "> <div class="footer-toast-content "> <span>Click “Save” to save your composing. If you wish to finish composing, click “Finish”
+    button.</span> </div> </div> <div class="col-sm-4 d-flex align-items-center text-align-right btn-inline-group "> <a class="btn btn-ask not_a " style="color:var(--azul) " href="#/evaluator/detail/{{eveId}} ">FINISH</a><a class="btn btn-submit not_a "
+    style="color:white ">Save</a> </div> </div> </div> -->
   </div>
 </div>

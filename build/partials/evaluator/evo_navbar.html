@@ -1,11 +1,17 @@
 <div class="group-filter d-flex justify-content-between align-items-center">
-  <div class="menu-tab d-flex"> <label class="btn .btn-secondaryn" ng-class="{active : navbar_selected == 'eva'}">
-            <a href="#/evaluator/review/{{eveId}}" class="not_a">EVALUATION</a>
-            </label> <label class="btn .btn-secondary" ng-class="{active : navbar_selected == 'idp'}">
-                <a href="#/idp/{{eveId}}" class="not_a">DEVELOPMENT PLAN</a>
-            </label> </div>
-  <div class="filter-select d-flex align-items-center"> <span>Period</span> <select class="custom-select" id="inputGroupSelect01">
-              <option value="2018" selected>2018</option>
-              <option value="2017">2017</option>
-          </select> </div>
+  <div class="menu-tab d-flex">
+    <label class="btn .btn-secondaryn" ng-class="{active : navbar_selected == 'eva'}">
+      <a href="#/evaluator/review/{{eveId}}" class="not_a">EVALUATION</a>
+    </label>
+    <label class="btn .btn-secondary" ng-class="{active : navbar_selected == 'idp'}">
+      <a href="#/idp/{{eveId}}" class="not_a">DEVELOPMENT PLAN</a>
+    </label>
+  </div>
+  <div class="filter-select d-flex align-items-center">
+    <span>Year</span>
+    <select class="custom-select" id="inputGroupSelect01">
+      <option value="2018" selected="selected">2018</option>
+      <option value="2017">2017</option>
+    </select>
+  </div>
 </div>

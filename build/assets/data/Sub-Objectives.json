@@ -4,9 +4,9 @@
       "sub_objectives":"Zero major issue that may break the build when submitting to SVN",
       "weight":20,
       "self_rate":60,
-      "rate1":77,
-      "rate2":86,
-      "achievement":8.2,
+      "rate1":20,
+      "rate2":30,
+      "achievement":81.5,
       "eta":"2018-11-30",
       "level":"Senior",
       "comment":"Target patially achieved with 2 minor issues (A & B) last Jul",
@@ -55,7 +55,7 @@
    {
       "objectives_id":"Innovation/Development",
       "sub_objectives":"Propose one initiative about working processes or tools or new technologies",
-      "weight":20,
+      "weight":10,
       "self_rate":97,
       "rate1":100,
       "rate2":74,
@@ -64,5 +64,17 @@
       "level":"Senior",
       "comment":"Target exceeded with 2 initiatives (A & B); one of which already implemented as of Aug",
 			"comment2":"Good, keep it up please!"
+   },{
+      "objectives_id":"Others",
+      "sub_objectives":"Gold delivery as per the approved deadline",
+      "weight":10,
+      "self_rate":60,
+      "rate1":20,
+      "rate2":30,
+      "achievement":81.5,
+      "eta":"2018-11-30",
+      "level":"Senior",
+      "comment":"Target patially achieved with 2 minor issues (A & B) last Jul",
+			"comment2":"Agree, but please ensure no such issues in the future."
    }
 ]
