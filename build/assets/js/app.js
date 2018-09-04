@@ -199,6 +199,17 @@ pms.controller('mainCtrl', ['$http', '$scope', '$routeParams', '$location', '$fi
     })
   }
 
+  $scope.remove_sub_obj = function(id){
+    $(id).remove();
+  }
+
+  // call rating schema
+  $http.get(url + 'rating_schema.json').then(function(data){
+    $scope.performance_schmemas = data.data[0];
+    $scope.behavioud_schmemas = data.data[1];
+  },function(err){
+    console.log(err);
+  })
 }])
 
 pms.controller('evaluator', ['$http', '$scope', '$routeParams', '$location', '$filter', function($http, $scope, $routeParams, $location, $filter) {
@@ -289,6 +300,7 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams', '$location', '$f
           current_period = this.custom_period;
         }
         $scope.current_period = current_period;
+        $('body').removeClass('modal-open');
       }
 
       // Add idp to list
@@ -528,6 +540,11 @@ pms.controller('evaluator', ['$http', '$scope', '$routeParams', '$location', '$f
         })
         .when("/evaluator/detail/:itemId", {
           templateUrl: "partials/evaluator/evo_detail_full.html",
+          controller: 'evaluator',
+          title: 'Evaluatee'
+        })
+        .when("/evaluator/detail_pds/:itemId", {
+          templateUrl: "partials/evaluator/evo_detail_full_pds.html",
           controller: 'evaluator',
           title: 'Evaluatee'
         })

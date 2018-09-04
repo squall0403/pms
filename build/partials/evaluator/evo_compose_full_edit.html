@@ -63,11 +63,11 @@
                 <div class="widget" ng-repeat="obj in objs | filter: 'Senior'" id="obj{{$index}}">
                   <div class="widget-big-title" style="padding-left:15px; font-weight: 600">
                     <span class="icon-arrow-down compose-icon" style="font-size:12px; margin-right:10px" ng-click="show_team('#sub_objs' + $index)"></span>
-                    <input style="display:inline-block;width:40%;" ng-value="obj.objective"/>
+                    <input style="display:inline-block;width:40%;font-weight:600" ng-value="obj.objective"/>
                     <span class="icon-plus compose-icon" ng-click="new_blank_sub_obj($index)"></span>
                   </div>
                   <div id="sub_objs{{$index}}">
-                    <div class="widget-content" style="margin-left:30px;" ng-repeat="sub_obj in sub_objs | filter : obj.objective | filter : 'Senior'">
+                    <div class="widget-content" style="margin-left:30px;" ng-repeat="sub_obj in sub_objs | filter : obj.objective | filter : 'Senior'" id="sub_objs_item{{$index}}">
                       <div class="widget-content-item display-table">
                         <div class="display-table-cell">
                           <div class="widget-content-item-content">
@@ -92,7 +92,7 @@
                             <span class="icon-docs compose-icon-right" ng-click="clone_sub_objs($event,'#clone-modal')">
                               <p>Clone</p>
                             </span>
-                            <span class="icon-trash compose-icon-right">
+                            <span class="icon-trash compose-icon-right" ng-click="remove_sub_obj('#sub_objs_item' + $index)">
                               <p>Delete</p>
                             </span>
                           </div>

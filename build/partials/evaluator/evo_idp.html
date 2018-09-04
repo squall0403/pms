@@ -2,12 +2,14 @@
 <ng-include src="'partials/evaluator/evo_header_bar.html'"></ng-include>
 <ng-include src="'partials/evaluator/evo_navbar.html'"></ng-include>
 <div style="padding-left:7rem">
+  <div class="row"></div>
   <div class="row">
-    <table class="idp_table" cellspacing=0 cellpadding=32>
+    <table class="idp_table" cellspacing="0" cellpadding="32">
       <thead>
         <tr>
           <th>Competency</th>
           <th>Objective</th>
+          <th>Mentor</th>
           <th>Priority</th>
           <th>ETA</th>
           <th>Progress</th>
@@ -17,8 +19,13 @@
       </thead>
       <tbody>
         <tr class="table_row_border" ng-repeat="idp in idps">
-          <td><a class="idp_item" ng-href="{{idp.ilearn == true ? 'https://ilearn.gameloft.org/course/796/dad-svn' : ''}}" ng-class="{not_a : idp.ilearn != true}">{{idp.competency}}</a></td>
+          <td>
+            <a class="idp_item" ng-href="{{idp.ilearn == true ? 'https://ilearn.gameloft.org/course/796/dad-svn' : ''}}" ng-class="{not_a : idp.ilearn != true}">{{idp.competency}}</a>
+          </td>
           <td>{{idp.objective}}</td>
+          <td>
+            <span class="icon-trophy" ng-click="show_team('#modal_coach')"></span>
+          </td>
           <td>{{idp.priority}}</td>
           <td>{{idp.eta}}</td>
           <td>{{idp.progress}}%</td>
@@ -26,7 +33,9 @@
           <td>{{idp.comment}}</td>
         </tr>
         <tr>
-          <td><button type="button" name="button" class="btn out_line" id="add_idp" ng-click="show_team('#modal_add')">add</button></td>
+          <td>
+            <button type="button" name="button" class="btn out_line" id="add_idp" ng-click="show_team('#modal_add')">add</button>
+          </td>
           <td></td>
           <td></td>
           <td></td>
@@ -43,33 +52,68 @@
 <!-- Modal -->
 <!-- The Modal -->
 <div id="modal_add" class="modal">
-  <!-- Modal content -->
-  <div class="modal-content">
-    <!-- <div class="modal-header">Add new competency</div> -->
-    <div class="modal-subheader">COMPETENCY</div> <select class="modal-select" name="" ng-model="added_idp">
-          <option ng-repeat="idp_ref in idp_refs" value="{{idp_ref.idp}}">{{idp_ref.idp}}</option>
-        </select>
-    <div class="modal-subheader">Objective</div> <input class="modal-select" value="" placeholder="Type your objective for selected competency" ng-model="added_obj_idp">
-    <div class="modal-subheader">Priority</div> <select class="modal-select" name="" ng-model="added_priority">
-        <option value="High">High</option>
-        <option value="Medium" selected>Medium</option>
-        <option value="Low">Low</option>
-      </select>
-    <div class="modal-subheader">ETA</div> <input class="modal-select" type="date" name="" value="" placeholder="2018-11-31" ng-model="added_idp_eta"> <button style="width:100%" type="button" name="button" class="btn btn-primary" ng-click='add_idp()'>ADD</button><button style="width:100%"
-      type="button" name="button" class="btn btn-plain" id="idp_cancel" ng-click="show_team('#modal_add')">cancel</button></div>
+<!-- Modal content -->
+<div class="modal-content">
+<!-- <div class="modal-header">Add new competency</div> -->
+<div class="modal-subheader">COMPETENCY</div>
+<select class="modal-select" name="" ng-model="added_idp">
+  <option ng-repeat="idp_ref in idp_refs" value="{{idp_ref.idp}}">{{idp_ref.idp}}</option>
+</select>
+<div class="modal-subheader">Objective</div>
+<input class="modal-select" value="" placeholder="Type your objective for selected competency" ng-model="added_obj_idp">
+<div class="modal-subheader">Priority</div>
+<select class="modal-select" name="" ng-model="added_priority">
+  <option value="High">High</option>
+  <option value="Medium" selected="selected">Medium</option>
+  <option value="Low">Low</option>
+</select>
+<div class="modal-subheader">ETA</div>
+<input class="modal-select" type="date" name="" value="" placeholder="2018-11-31" ng-model="added_idp_eta">
+<button style="width:100%" type="button" name="button" class="btn btn-primary" ng-click='add_idp()'>ADD</button>
+<button style="width:100%" type="button" name="button" class="btn btn-plain" id="idp_cancel" ng-click="show_team('#modal_add')">cancel</button>
+</div>
 </div>
 <div id="modal_edit" class="modal">
-  <!-- Modal content -->
-  <div class="modal-content">
-    <div class="modal-subheader">competency</div> <input type="text" name="" ng-model="editing_idp.competency" class="modal-select" disabled>
-    <div class="modal-subheader">eta</div> <input type="date" name="" ng-model="editing_idp.eta" class="modal-select">
-    <div class="modal-subheader">progress (%)</div> <input type="number" name="" ng-model="editing_idp.progress" class="modal-select">
-    <div class="modal-subheader">status</div> <input class="modal-select" ng-model="editing_idp.status" disabled>
-    <!-- <select class="modal-select" ng-model="edit_idp.status">
-        <option value="Not Started">Not Started</option>
-        <option value="In Progress">In Progress</option>
-        <option value="Completed">Completed</option>
-      </select> -->
-    <div class="modal-subheader">Comment</div> <textarea class="modal-select" rows="3" style="height:auto" ng-model="editing_idp.comment">{{edit_idp.comment}}</textarea> <button type="button" name="button" class="btn btn-primary" ng-click="save_edit_idp(idpId)" style="width:100%; margin-bottom:1rem">SAVE</button>    <button type="button" name="button" class="btn btn-plain" id="edit_cancel" ng-click="save_edit_idp(idpId)" style="width:100%; margin-bottom:1rem">cancel</button> <button type="button" name="button" class="btn btn-danger" id="edit_cancel" ng-click="delete_idp()"
-      style="width:100%; margin-bottom:1rem">delete</button></div>
+<!-- Modal content -->
+<div class="modal-content">
+<div class="modal-subheader">competency</div>
+<input type="text" name="" ng-model="editing_idp.competency" class="modal-select" disabled="disabled">
+<div class="modal-subheader">eta</div>
+<input type="date" name="" ng-model="editing_idp.eta" class="modal-select">
+<div class="modal-subheader">progress (%)</div>
+<input type="number" name="" ng-model="editing_idp.progress" class="modal-select">
+<div class="modal-subheader">status</div>
+<input class="modal-select" ng-model="editing_idp.status" disabled="disabled">
+<!-- <select class="modal-select" ng-model="edit_idp.status"> <option value="Not Started">Not Started</option> <option value="In Progress">In Progress</option> <option value="Completed">Completed</option> </select> -->
+<div class="modal-subheader">Comment</div>
+<textarea class="modal-select" rows="3" style="height:auto" ng-model="editing_idp.comment">{{edit_idp.comment}}</textarea>
+<button type="button" name="button" class="btn btn-primary" ng-click="save_edit_idp(idpId)" style="width:100%; margin-bottom:1rem">SAVE</button>
+<button type="button" name="button" class="btn btn-plain" id="edit_cancel" ng-click="save_edit_idp(idpId)" style="width:100%; margin-bottom:1rem">cancel</button>
+<button type="button" name="button" class="btn btn-danger" id="edit_cancel" ng-click="delete_idp()" style="width:100%; margin-bottom:1rem">delete</button>
+</div>
+</div>
+<div id="modal_coach" class="modal">
+<!-- Modal content -->
+<div class="modal-content" style="width: fit-content">
+<h2>Mentor for this skill</h2>
+<table class="idp_table">
+  <thead>
+    <th>Name</th>
+    <th>Studio</th>
+    <th>Department</th>
+    <th>email</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="user in users">
+      <td>{{user.full_name}}</td>
+      <td>{{user.studio}}</td>
+      <td>{{user.department}}</td>
+      <td>
+        <a href="mailto:{{user.email}}" class="not_a">{{user.email}}</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<button type="button" name="button" class="btn btn-plain" id="edit_cancel" ng-click="show_team('#modal_coach')" style="width:100%; margin-top:1rem">Close</button>
+</div>
 </div>
